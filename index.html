@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso interactivo — Glaucoma avanzado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --ink: #13303a;
+            --sea: #1f4e5f;
+            --sea2: #2e6a7e;
+            --teal-soft: #7fb0bd;
+            --sand: #d29a4e;
+            --sand-soft: #f4e6cd;
+            --paper: #f6f1e8;
+            --card: #ffffff;
+            --danger: #b0413e;
+            --ok: #3f7d5c;
+            --line: #dfd5c4;
+            --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --body: 'Mulish', -apple-system, Segoe UI, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--body);
+            color: var(--ink);
+            background: var(--paper);
+            background-image: radial-gradient(circle at 12% 8%, rgba(210, 154, 78, .10), transparent 45%),
+                radial-gradient(circle at 88% 20%, rgba(31, 78, 95, .10), transparent 40%);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 3vw, 28px)
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--display);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -.01em
+        }
+
+        a {
+            color: var(--sea2)
+        }
+
+        .muted {
+            color: #6c6253
+        }
+
+        /* HERO */
+        header.hero {
+            background: linear-gradient(160deg, #173b46 0%, #1f4e5f 55%, #27637a 100%);
+            color: #f6f1e8;
+            padding: clamp(38px, 6vw, 70px) 0 clamp(34px, 5vw, 58px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 80% 120%, rgba(210, 154, 78, .28), transparent 45%);
+            pointer-events: none
+        }
+
+        .eyebrow {
+            font-family: var(--body);
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: var(--sand);
+            opacity: .95
+        }
+
+        header.hero h1 {
+            font-size: clamp(34px, 6vw, 58px);
+            margin: 14px 0 10px;
+            color: #fbf6ed
+        }
+
+        header.hero p {
+            max-width: 640px;
+            color: #d7e4e8;
+            font-size: clamp(15px, 2.4vw, 18px)
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .22);
+            padding: 7px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            backdrop-filter: blur(4px)
+        }
+
+        /* DISCLAIMER */
+        .disclaimer {
+            background: var(--sand-soft);
+            border: 1px solid #e7cf9f;
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin: 26px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start
+        }
+
+        .disclaimer .ic {
+            font-size: 22px;
+            line-height: 1.2
+        }
+
+        .disclaimer b {
+            font-family: var(--display);
+            font-size: 17px
+        }
+
+        .disclaimer p {
+            font-size: 14.5px;
+            color: #5e533f;
+            margin-top: 3px
+        }
+
+        /* SECTION */
+        section {
+            padding: clamp(32px, 5vw, 52px) 0;
+            scroll-margin-top: 64px
+        }
+
+        .sec-head {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 8px
+        }
+
+        .sec-num {
+            font-family: var(--display);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--sand);
+            border: 1.5px solid var(--sand);
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            flex: none
+        }
+
+        h2 {
+            font-size: clamp(24px, 4vw, 34px);
+            color: var(--ink)
+        }
+
+        .lead {
+            font-size: clamp(14.5px, 1.6vw, 16.5px);
+            color: #4f4636;
+            max-width: 760px;
+            margin: 6px 0 22px
+        }
+
+        /* CARDS */
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .g2 {
+            grid-template-columns: repeat(2, 1fr)
+        }
+
+        .g3 {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        @media(max-width:960px) {
+            .g3 {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:680px) {
+
+            .g2,
+            .g3 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: clamp(18px, 2.5vw, 24px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
+            transition: transform .18s ease, box-shadow .18s ease
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(19, 48, 58, .07)
+        }
+
+        .card h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+            color: var(--sea)
+        }
+
+        .card.tint {
+            background: linear-gradient(180deg, #ffffff, #fbf7ee)
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px
+        }
+
+        .tag.green {
+            background: #e2f0e7;
+            color: var(--ok)
+        }
+
+        .tag.sand {
+            background: var(--sand-soft);
+            color: #9a6a1f
+        }
+
+        .tag.sea {
+            background: #e1edf1;
+            color: var(--sea)
+        }
+
+        .tag.red {
+            background: #f6e1e0;
+            color: var(--danger)
+        }
+
+        /* EYE 3D */
+        .eye-stage {
+            position: relative;
+            background: radial-gradient(circle at 50% 40%, #22596c, #13303a);
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 320px;
+            border: 1px solid #16414e
+        }
+
+        #eyeCanvas {
+            display: block;
+            width: 100%;
+            height: clamp(320px, 52vw, 480px);
+            touch-action: none;
+            cursor: grab
+        }
+
+        #eyeCanvas:active {
+            cursor: grabbing
+        }
+
+        .eye-label {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(19, 48, 58, .7);
+            border: 1px solid rgba(255, 255, 255, .25);
+            padding: 3px 9px;
+            border-radius: 20px;
+            white-space: nowrap;
+            transition: opacity .2s
+        }
+
+        .eye-label .dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--sand);
+            margin-right: 6px;
+            vertical-align: middle
+        }
+
+        .eye-hint {
+            position: absolute;
+            left: 14px;
+            bottom: 12px;
+            font-size: 12px;
+            color: #bcd2d8;
+            background: rgba(0, 0, 0, .25);
+            padding: 5px 10px;
+            border-radius: 8px
+        }
+
+        .concept-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 16px
+        }
+
+        .cbtn {
+            font-family: var(--body);
+            font-weight: 700;
+            font-size: 13.5px;
+            border: 1.5px solid var(--line);
+            background: #fff;
+            color: var(--sea);
+            padding: 9px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .18s
+        }
+
+        .cbtn:hover {
+            border-color: var(--sea2);
+            transform: translateY(-1px)
+        }
+
+        .cbtn.active {
+            background: var(--sea);
+            color: #fff;
+            border-color: var(--sea)
+        }
+
+        .concept-panel {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--sand);
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-top: 16px;
+            min-height: 90px
+        }
+
+        .concept-panel h3 {
+            font-size: 18px;
+            color: var(--sea);
+            margin-bottom: 5px
+        }
+
+        .concept-panel p {
+            font-size: 15px;
+            color: #463e30
+        }
+
+        /* TABLE COMPARE */
+        .eyes {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            font-size: 14.5px
+        }
+
+        .eyes>div {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .eyes .hd {
+            background: var(--sea);
+            color: #fff;
+            font-weight: 800;
+            font-family: var(--body);
+            border-bottom: none
+        }
+
+        .eyes .rh {
+            font-weight: 700;
+            color: #5e533f;
+            background: #faf6ee
+        }
+
+        .eyes .od {
+            background: #fdf2ec
+        }
+
+        @media(max-width:620px) {
+            .eyes {
+                grid-template-columns: 1fr 1fr;
+                font-size: 13.5px
+            }
+
+            .eyes>div {
+                padding: 10px 12px
+            }
+
+            .eyes .hd:first-child {
+                display: none
+            }
+
+            .eyes .rh {
+                grid-column: 1 / -1;
+                background: #ede4d0;
+                color: var(--sea);
+                font-size: 12.5px;
+                text-transform: uppercase;
+                letter-spacing: .04em
+            }
+        }
+
+        /* CHARTS */
+        .chart-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: clamp(16px, 2.2vw, 22px)
+        }
+
+        .chart-card h3 {
+            font-size: 17px;
+            color: var(--sea);
+            margin-bottom: 4px
+        }
+
+        .chart-card .cap {
+            font-size: 13px;
+            color: #6c6253;
+            margin-bottom: 12px
+        }
+
+        .chart-box {
+            position: relative;
+            height: clamp(200px, 30vw, 250px)
+        }
+
+        /* TIMELINE */
+        .tl {
+            position: relative;
+            margin-top: 8px;
+            padding-left: 6px
+        }
+
+        .tl::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: linear-gradient(var(--sand), var(--sea))
+        }
+
+        .tl .ev {
+            position: relative;
+            padding: 0 0 20px 34px
+        }
+
+        .tl .ev::before {
+            content: "";
+            position: absolute;
+            left: 1.5px;
+            top: 3px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid var(--sea)
+        }
+
+        .tl .ev.warn::before {
+            border-color: var(--danger)
+        }
+
+        .tl .ev .d {
+            font-weight: 800;
+            color: var(--sea);
+            font-size: 13.5px
+        }
+
+        .tl .ev .t {
+            font-size: 14.5px;
+            color: #463e30
+        }
+
+        /* TUNNEL VISION viz */
+        .vis-demo {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        .scene {
+            flex: 1;
+            min-width: 180px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            position: relative;
+            aspect-ratio: 4/3;
+            background: linear-gradient(120deg, #8fb98f, #cdd8a3 60%, #e8dca0)
+        }
+
+        .scene .cap2 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(19, 48, 58, .78);
+            color: #fff;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 6px 10px;
+            text-align: center
+        }
+
+        .scene.tunnel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 45%, transparent 17%, rgba(10, 18, 20, .92) 42%)
+        }
+
+        .scene.blind::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 18, 20, .96)
+        }
+
+        /* VISION SIMULATOR — 3 columns */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        @media (max-width: 980px) {
+            .sim-grid {
+                grid-template-columns: 1fr;
+                gap: 12px
+            }
+        }
+
+        .sim-col {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #16414e;
+            background: #0e2329
+        }
+
+        .sim-col canvas {
+            display: block;
+            width: 100%;
+            height: clamp(220px, 26vw, 320px);
+            touch-action: none;
+            cursor: grab;
+            transition: filter .45s ease
+        }
+
+        .sim-col canvas:active {
+            cursor: grabbing
+        }
+
+        @media (max-width: 980px) {
+            .sim-col canvas {
+                height: clamp(220px, 50vw, 300px)
+            }
+        }
+
+        .sim-title {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            z-index: 3;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .02em;
+            background: rgba(19, 48, 58, .72);
+            padding: 5px 11px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px)
+        }
+
+        .sim-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block
+        }
+
+        .sim-hint-inline {
+            font-size: 12.5px;
+            color: #7a6f5c;
+            align-self: center;
+            margin-left: 4px
+        }
+
+        .vis-ov {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            transition: background .45s ease;
+            background: transparent
+        }
+
+        .vis-cap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(19, 48, 58, .85);
+            color: #fff;
+            font-size: 13.5px;
+            font-weight: 700;
+            padding: 9px 14px;
+            text-align: center
+        }
+
+        .sim-hint {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            font-size: 12px;
+            color: #cfe0e4;
+            background: rgba(0, 0, 0, .32);
+            padding: 5px 10px;
+            border-radius: 8px;
+            pointer-events: none
+        }
+
+        .mode-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 14px
+        }
+
+        .mbtn {
+            font-family: var(--body);
+            font-weight: 700;
+            font-size: 13.5px;
+            border: 1.5px solid var(--line);
+            background: #fff;
+            color: var(--sea);
+            padding: 9px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .18s
+        }
+
+        .mbtn:hover {
+            border-color: var(--sea2);
+            transform: translateY(-1px)
+        }
+
+        .mbtn.active {
+            background: var(--sea);
+            color: #fff;
+            border-color: var(--sea)
+        }
+
+        .mbtn.ghost {
+            background: transparent;
+            color: #7a6f5c;
+            border-style: dashed
+        }
+
+        /* LISTS */
+        .checklist {
+            list-style: none;
+            display: grid;
+            gap: 9px
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            font-size: 15px;
+            color: #463e30
+        }
+
+        .checklist li::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 7px;
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            background: var(--sand-soft);
+            border: 1.5px solid var(--sand)
+        }
+
+        .alarm {
+            background: #fbeceb;
+            border: 1px solid #e9c4c2;
+            border-radius: 14px;
+            padding: 18px 20px
+        }
+
+        .alarm h3 {
+            color: var(--danger)
+        }
+
+        .alarm ul {
+            list-style: none;
+            display: grid;
+            gap: 7px;
+            margin-top: 8px
+        }
+
+        .alarm li {
+            padding-left: 24px;
+            position: relative;
+            font-size: 14.5px
+        }
+
+        .alarm li::before {
+            content: "!";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 900;
+            color: var(--danger);
+            width: 17px;
+            height: 17px;
+            background: #f6d6d4;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 17px
+        }
+
+        /* Q */
+        .qlist {
+            display: grid;
+            gap: 10px
+        }
+
+        .q {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 15px;
+            display: flex;
+            gap: 12px
+        }
+
+        .q .num {
+            font-family: var(--display);
+            font-weight: 700;
+            color: var(--sand);
+            flex: none
+        }
+
+        /* ACCORDION */
+        .acc {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden
+        }
+
+        .acc summary {
+            cursor: pointer;
+            padding: 15px 18px;
+            font-weight: 700;
+            font-size: 15.5px;
+            color: var(--sea);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .acc summary::-webkit-details-marker {
+            display: none
+        }
+
+        .acc summary .pl {
+            color: var(--sand);
+            font-size: 20px;
+            transition: .2s
+        }
+
+        .acc[open] summary .pl {
+            transform: rotate(45deg)
+        }
+
+        .acc .body {
+            padding: 0 18px 16px;
+            font-size: 14.5px;
+            color: #463e30
+        }
+
+        /* REFS */
+        .refs {
+            columns: 2;
+            column-gap: 26px
+        }
+
+        @media(max-width:680px) {
+            .refs {
+                columns: 1
+            }
+        }
+
+        .refs .r {
+            break-inside: avoid;
+            margin-bottom: 14px;
+            font-size: 13.5px
+        }
+
+        .refs .r a {
+            word-break: break-word
+        }
+
+        .refs h3 {
+            font-family: var(--body);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--sand);
+            margin: 6px 0 8px
+        }
+
+        footer {
+            background: var(--ink);
+            color: #cdd9dd;
+            padding: 34px 0;
+            font-size: 13.5px;
+            text-align: center
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--line);
+            margin: 6px 0 0
+        }
+
+        /* TOC NAV — compact in-page navigation */
+        .toc {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(246, 241, 232, .92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .toc-inner {
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding: 10px 0;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .toc a {
+            flex: none;
+            color: var(--sea);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 7px 13px;
+            border-radius: 20px;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            transition: .15s
+        }
+
+        .toc a:hover {
+            background: #fff;
+            border-color: var(--line)
+        }
+
+        /* MOBILE/TABLET refinements */
+        @media (max-width: 760px) {
+            .hero-meta {
+                gap: 8px;
+                margin-top: 20px
+            }
+
+            .chip {
+                font-size: 12px;
+                padding: 6px 12px
+            }
+
+            .disclaimer {
+                padding: 14px 16px;
+                gap: 10px;
+                border-radius: 14px
+            }
+
+            .sec-head {
+                gap: 10px
+            }
+
+            .sec-num {
+                width: 30px;
+                height: 30px;
+                font-size: 14px
+            }
+
+            .concept-bar {
+                gap: 7px
+            }
+
+            .cbtn,
+            .mbtn {
+                font-size: 12.5px;
+                padding: 8px 12px
+            }
+
+            .toc-inner {
+                padding: 8px 0
+            }
+
+            .toc a {
+                font-size: 12.5px;
+                padding: 6px 11px
+            }
+        }
+
+        @media (max-width: 480px) {
+            header.hero h1 {
+                font-size: 30px
+            }
+
+            .eyes {
+                grid-template-columns: 1fr
+            }
+
+            .eyes .hd {
+                text-align: center
+            }
+        }
+
+        /* Reduced motion — respect user preference */
+        @media (prefers-reduced-motion: reduce) {
+
+            .card,
+            .cbtn,
+            .mbtn {
+                transition: none
+            }
+
+            html {
+                scroll-behavior: auto
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="wrap">
+            <div class="eyebrow">Documento interactivo · Apoyo informativo</div>
+            <h1>Entendiendo el caso, paso a paso</h1>
+            <p>Glaucoma avanzado y enfermedad vascular ocular. Una guía visual para comprender qué se tiene, qué se
+                sugiere y qué alternativas menos invasivas existen — con un modelo 3D del ojo y gráficas.</p>
+            <div class="hero-meta">
+                <span class="chip">María Felida Torres Valcárcel</span>
+                <span class="chip">69 años</span>
+                <span class="chip">Ojo izquierdo = ojo a proteger</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="toc" aria-label="Índice del documento">
+        <div class="wrap">
+            <div class="toc-inner">
+                <a href="#ojo">1 · El ojo</a>
+                <a href="#situacion">2 · Situación</a>
+                <a href="#historia">3 · Historia</a>
+                <a href="#sugerido">4 · Lo sugerido</a>
+                <a href="#decision">5 · Decisión</a>
+                <a href="#alternativas">6 · Alternativas</a>
+                <a href="#cuidados">7 · Cuidados</a>
+                <a href="#preguntas">8 · Preguntas</a>
+                <a href="#referencias">9 · Referencias</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrap">
+
+        <div class="disclaimer">
+            <div class="ic">⚕️</div>
+            <div>
+                <b>Esto es información, no un diagnóstico</b>
+                <p>Este material es educativo y no reemplaza a los médicos tratantes. Sirve para entender la situación y
+                    preparar preguntas. Toda decisión se toma con el oftalmólogo. Los estudios citados son generales y
+                    no necesariamente aplican igual al caso individual.</p>
+            </div>
+        </div>
+
+        <!-- 3D EYE -->
+        <section id="ojo">
+            <div class="sec-head"><span class="sec-num">1</span>
+                <h2>El ojo en 3D: conceptos clave</h2>
+            </div>
+            <p class="lead">Arrastra para girar el ojo. Toca cada concepto para resaltar la estructura y leer una
+                explicación sencilla. Estos son los puntos donde ocurre la enfermedad de tu mamá.</p>
+
+            <div class="eye-stage">
+                <canvas id="eyeCanvas"></canvas>
+                <div class="eye-hint">🖐️ Arrastra para girar · pasa el cursor sobre el ojo para ver los nombres</div>
+            </div>
+
+            <div class="concept-bar" id="conceptBar"></div>
+            <div class="concept-panel" id="conceptPanel">
+                <h3>Un vistazo general</h3>
+                <p>El ojo funciona como una cámara: la luz entra por la córnea y la pupila, atraviesa el cristalino y
+                    llega a la retina, que envía la imagen al cerebro por el <b>nervio óptico</b>. El glaucoma daña ese
+                    nervio, casi siempre porque la presión dentro del ojo sube cuando el sistema de drenaje falla. Toca
+                    los botones de arriba para ver cada parte.</p>
+            </div>
+        </section>
+
+        <!-- 2. SITUACION -->
+        <section id="situacion">
+            <div class="sec-head"><span class="sec-num">2</span>
+                <h2>Lo que se tiene hoy</h2>
+            </div>
+            <p class="lead">El cuadro combina varios problemas a la vez: glaucoma muy avanzado en ambos ojos (de tipos
+                distintos), una secuela de obstrucción de una vena de la retina en el ojo derecho, y factores generales
+                que afectan la circulación del nervio óptico.</p>
+
+            <div class="eyes" style="margin-bottom:22px">
+                <div class="hd">&nbsp;</div>
+                <div class="hd">Ojo derecho (OD)</div>
+                <div class="hd">Ojo izquierdo (OI)</div>
+                <div class="rh">Visión</div>
+                <div class="od">Muy reducida: solo percibe movimiento de manos</div>
+                <div>Conservada: 20/25 — es el ojo útil</div>
+                <div class="rh">Tipo de ángulo</div>
+                <div class="od">Cerrado</div>
+                <div>Abierto (donde el láser SLT funciona)</div>
+                <div class="rh">Daño del nervio (CUP)</div>
+                <div class="od">0.99 — casi total</div>
+                <div>0.95 — muy avanzado</div>
+                <div class="rh">Presión intraocular</div>
+                <div class="od">28 mmHg</div>
+                <div>23 mmHg</div>
+                <div class="rh">Particularidad</div>
+                <div class="od">Glaucoma neovascular, hemorragias, secuela de oclusión venosa, trabeculectomía fallida
+                </div>
+                <div>Único ojo funcional, visión en túnel</div>
+            </div>
+
+            <div class="grid g2">
+                <div class="chart-card">
+                    <h3>Presión intraocular</h3>
+                    <div class="cap">Un rango sano suele estar por debajo de ~21 mmHg. Ambos ojos están por encima.
+                    </div>
+                    <div class="chart-box"><canvas id="iopChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Excavación del nervio óptico (CUP)</h3>
+                    <div class="cap">Cuanto más cerca de 1.0, mayor el daño. Un nervio sano ronda 0.3.</div>
+                    <div class="chart-box"><canvas id="cupChart"></canvas></div>
+                </div>
+            </div>
+
+            <h3 style="margin:30px 0 12px;color:var(--sea)">Cómo ve cada ojo — simulación 3D</h3>
+            <p class="lead" style="margin-top:-4px">La misma habitación, vista a la vez como la ve una persona sana, como
+                la ve el ojo izquierdo (visión en túnel) y como la ve el ojo derecho (casi sin visión). La cámara hace un
+                paneo lento; arrastra cualquiera de las vistas para mirar alrededor — las tres se mueven en sincronía.
+            </p>
+            <div class="sim-grid">
+                <div class="sim-col" data-mode="normal">
+                    <div class="sim-title"><span class="sim-dot" style="background:#7fd29c"></span>Visión normal</div>
+                    <canvas></canvas>
+                    <div class="vis-ov"></div>
+                    <div class="vis-cap">Referencia — cómo se ve una habitación con visión sana</div>
+                </div>
+                <div class="sim-col" data-mode="tunnel">
+                    <div class="sim-title"><span class="sim-dot" style="background:#d29a4e"></span>Ojo izquierdo · 20/25 en túnel</div>
+                    <canvas></canvas>
+                    <div class="vis-ov"></div>
+                    <div class="vis-cap">Ve nítido solo en el centro — el resto del campo está perdido por el glaucoma (CUP 0.95)</div>
+                </div>
+                <div class="sim-col" data-mode="blind">
+                    <div class="sim-title"><span class="sim-dot" style="background:#b0413e"></span>Ojo derecho · movimiento de manos</div>
+                    <canvas></canvas>
+                    <div class="vis-ov"></div>
+                    <div class="vis-cap">Percibe luz y siluetas en movimiento, sin detalles ni color, con tinte rojizo por hemorragias</div>
+                </div>
+            </div>
+            <div class="mode-bar">
+                <button class="mbtn ghost" id="panToggle">⏸ Pausar paneo</button>
+                <span class="sim-hint-inline">🖐️ Arrastra cualquier vista para mirar alrededor</span>
+            </div>
+            <p class="muted" style="font-size:13px;margin-top:10px">Representación aproximada con fines educativos; la
+                percepción real de cada persona varía.</p>
+        </section>
+
+        <!-- 3. TIMELINE -->
+        <section id="historia">
+            <div class="sec-head"><span class="sec-num">3</span>
+                <h2>La historia, en orden</h2>
+            </div>
+            <p class="lead">Una línea de tiempo de los hitos principales registrados en las historias clínicas de
+                neurología y oftalmología.</p>
+            <div class="tl">
+                <div class="ev warn">
+                    <div class="d">Nov 2022</div>
+                    <div class="t">Episodio de pérdida transitoria de visión y dolor de cabeza. Estudios muestran
+                        ángulos estrechos en ambos ojos y cataratas. Antecedente de AIT (mini-derrame).</div>
+                </div>
+                <div class="ev">
+                    <div class="d">Feb 2023</div>
+                    <div class="t">Iridotomía con láser en ambos ojos (para los ángulos estrechos).</div>
+                </div>
+                <div class="ev">
+                    <div class="d">Nov–Dic 2024</div>
+                    <div class="t">Trabeculectomía (cirugía de glaucoma) en el ojo derecho — posteriormente fallida.
+                    </div>
+                </div>
+                <div class="ev warn">
+                    <div class="d">2025</div>
+                    <div class="t">Oclusión de una vena de la retina en el ojo derecho (“infarto ocular”), que
+                        dispara el glaucoma neovascular. Tres inyecciones de aflibercept (anti-VEGF) y fotocoagulación.
+                    </div>
+                </div>
+                <div class="ev">
+                    <div class="d">Ene 2026</div>
+                    <div class="t">Control de neurología: neuropatía óptica isquémica, microangiopatía; se piden más
+                        estudios (RM de órbitas, AQP4).</div>
+                </div>
+                <div class="ev warn">
+                    <div class="d">May 2026</div>
+                    <div class="t">Valoración por especialista en glaucoma: plan de láser SLT prioritario en ojo
+                        izquierdo y propuesta de válvula en el derecho (declinada por la familia).</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SUGERIDO -->
+        <section id="sugerido">
+            <div class="sec-head"><span class="sec-num">4</span>
+                <h2>Lo que sugieren los médicos</h2>
+            </div>
+            <div class="grid g2">
+                <div class="card tint">
+                    <span class="tag green">Prioritario · poco invasivo</span>
+                    <h3>Láser SLT en el ojo izquierdo</h3>
+                    <p>Procedimiento ambulatorio, sin cortes, con gotas anestésicas. Busca bajar la presión del ojo
+                        útil. Es el siguiente paso clave para proteger la visión que queda.</p>
+                </div>
+                <div class="card tint">
+                    <span class="tag sand">Decidido no realizar</span>
+                    <h3>Válvula (Clear Path) en el ojo derecho</h3>
+                    <p>Cirugía para bajar la presión del ojo derecho. Los médicos advirtieron mal pronóstico visual y
+                        riesgo de pérdida brusca de visión. La familia decidió no operarlo, lo cual es razonable.</p>
+                </div>
+                <div class="card">
+                    <span class="tag sea">Continuar</span>
+                    <h3>Gotas actuales</h3>
+                    <p>Krytantek (combinación triple) cada 12 horas y Lumigan en la noche, en ambos ojos. Ya es una
+                        terapia casi máxima: por eso se añade el láser y no más gotas.</p>
+                </div>
+                <div class="card">
+                    <span class="tag sea">Seguimiento</span>
+                    <h3>Estudios y controles</h3>
+                    <p>Exámenes prequirúrgicos, y por neurología, resonancia de órbitas con contraste y anticuerpo AQP4
+                        para descartar otras causas del daño del nervio.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. DECIDIR NO OPERAR -->
+        <section id="decision">
+            <div class="sec-head"><span class="sec-num">5</span>
+                <h2>Decidir no operar: qué esperar con el tiempo</h2>
+            </div>
+            <p class="lead">No someterse a una cirugía es una opción válida y frecuente, sobre todo cuando un ojo tiene
+                poco potencial de visión y la operación trae riesgos altos. Aquí se explica, en términos generales, qué
+                influye en cuánto tiempo puede pasar sin empeorar — y por qué <b>no operar la válvula no significa no
+                hacer nada</b>.</p>
+
+            <div class="grid g3">
+                <div class="card tint">
+                    <span class="tag green">Decisión válida</span>
+                    <h3>No operar puede ser lo correcto</h3>
+                    <p>Cuando un ojo ya ve muy poco (solo movimiento de manos) y la cirugía tiene riesgo de perder de
+                        golpe el resto de visión, muchos especialistas y familias eligen priorizar la <b>comodidad y la
+                        seguridad</b> sobre intentar recuperar una visión que probablemente no volverá. Es una decisión
+                        informada, no un abandono.</p>
+                </div>
+                <div class="card">
+                    <span class="tag sea">Qué influye en el tiempo</span>
+                    <h3>¿Cuánto puede pasar sin empeorar?</h3>
+                    <p>El glaucoma suele avanzar <b>despacio, en meses o años</b>, no en días. La velocidad depende sobre
+                        todo de la presión del ojo, de qué tan dañado está el nervio (CUP) y de factores generales como
+                        la circulación. A más presión y más daño previo, más rápido el deterioro — por eso controlar la
+                        presión sigue siendo lo más importante aunque no se opere.</p>
+                </div>
+                <div class="card">
+                    <span class="tag sand">Importante</span>
+                    <h3>No operar la válvula ≠ no tratar</h3>
+                    <p>El plan continúa: gotas, láser SLT en el ojo izquierdo y, para el ojo derecho, anti-VEGF y
+                        fotocoagulación para mantenerlo cómodo. Si más adelante hay dolor o presión muy alta, existen
+                        opciones láser menos invasivas. El objetivo cambia de “recuperar visión” a <b>proteger el ojo
+                        bueno y evitar dolor</b>.</p>
+                </div>
+            </div>
+
+            <div class="concept-panel" style="margin-top:18px">
+                <h3>Lo que muestran los estudios</h3>
+                <p>En el glaucoma, bajar la presión del ojo <b>retrasa</b> el daño del nervio: en estudios de
+                    seguimiento de varios años, reducir la presión disminuyó de forma clara el riesgo de que la
+                    enfermedad avanzara, y cada milímetro de mercurio menos cuenta. Por eso, aunque se decida no operar
+                    el ojo derecho, mantener la presión controlada —con las gotas y el láser SLT en el ojo izquierdo— es
+                    lo que más protege el tiempo de visión útil. No existe un número exacto de “años garantizados”: cada
+                    persona avanza distinto, y por eso los controles periódicos sirven para detectar a tiempo si algo
+                    cambia.</p>
+            </div>
+
+            <div class="grid g2" style="margin-top:18px">
+                <div class="card">
+                    <h3 style="color:var(--danger)">Ojo derecho · el objetivo es la comodidad</h3>
+                    <ul class="checklist">
+                        <li>Ya tiene muy poca visión, así que no se busca recuperarla.</li>
+                        <li>El riesgo con el tiempo es que la presión alta cause dolor o enrojecimiento.</li>
+                        <li>Se maneja con anti-VEGF, láser y gotas; puede mantenerse cómodo mucho tiempo.</li>
+                        <li>Si apareciera dolor persistente, hay procedimientos para aliviarlo.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 style="color:var(--sea)">Ojo izquierdo · aquí el tiempo importa más</h3>
+                    <ul class="checklist">
+                        <li>Es el ojo útil (20/25): el objetivo es <b>preservar</b> lo que ve.</li>
+                        <li>Con tratamiento, la visión en túnel suele avanzar lentamente.</li>
+                        <li>Sin control de la presión, el túnel puede cerrarse más rápido.</li>
+                        <li>Por eso el láser SLT y la constancia con las gotas son prioritarios.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ALTERNATIVAS -->
+        <section id="alternativas">
+            <div class="sec-head"><span class="sec-num">6</span>
+                <h2>Alternativas menos invasivas (con evidencia)</h2>
+            </div>
+            <p class="lead">Toca cada tarjeta para ampliar. La evidencia citada está enlazada en la sección de
+                referencias.</p>
+
+            <details class="acc" open>
+                <summary>Ojo izquierdo: el láser SLT ya ES la opción menos invasiva <span class="pl">+</span></summary>
+                <div class="body">Aunque se describió como “más complejo que la iridotomía”, la SLT es uno de
+                    los procedimientos menos invasivos que existen: ambulatorio, sin incisiones y repetible. En el
+                    ensayo <b>LiGHT</b> (6 años), logró control de presión sin gotas en cerca del 70% de ojos de ángulo
+                    abierto, sin complicaciones que amenazaran la visión. Una revisión de ~8.900 ojos confirma su
+                    eficacia a largo plazo. Aplica justo a su caso porque el ojo izquierdo es de <b>ángulo abierto</b>.
+                </div>
+            </details>
+
+            <details class="acc">
+                <summary>Factores generales no invasivos: presión arterial y sueño <span class="pl">+</span></summary>
+                <div class="body">La presión arterial que “sube y baja como yoyo” se asocia con progresión del
+                    daño del nervio, sobre todo por las <b>caídas nocturnas</b> que reducen la sangre al nervio óptico.
+                    Se puede plantear al médico: un <b>MAPA de 24 horas</b>, revisar el horario de los antihipertensivos
+                    para no bajar demasiado la presión de noche, y tratar la <b>apnea del sueño</b>. Son medidas sin
+                    cirugía.</div>
+            </details>
+
+            <details class="acc">
+                <summary>Neuroprotección: nicotinamida (vitamina B3) <span class="pl">+</span></summary>
+                <div class="body">Complemento de bajo riesgo y evidencia emergente — <b>nunca</b> en reemplazo del
+                    control de la presión. Un ensayo aleatorizado mostró mejoría de la función de la retina al añadir
+                    nicotinamida al tratamiento habitual, en dosis altas (1,5–3 g/día en estudios). Debe consultarse con
+                    el médico antes de iniciarla.</div>
+            </details>
+
+            <details class="acc">
+                <summary>Ojo derecho: ruta menos invasiva si se evita la válvula <span class="pl">+</span></summary>
+                <div class="body">Como el objetivo es mantener el ojo cómodo: continuar anti-VEGF (ya recibió
+                    aflibercept) y la fotocoagulación realizada, que reducen los neovasos y ayudan con la presión y el
+                    dolor. Si más adelante hay dolor o presión muy alta, la <b>ciclofotocoagulación micropulso</b> es
+                    una opción láser menos destructiva que las técnicas tradicionales y menos invasiva que la válvula,
+                    pensada para ojos con poco potencial visual.</div>
+            </details>
+        </section>
+
+        <!-- 7. CUIDADOS -->
+        <section id="cuidados">
+            <div class="sec-head"><span class="sec-num">7</span>
+                <h2>Cuidados en casa</h2>
+            </div>
+            <div class="grid g3">
+                <div class="card">
+                    <h3>Tratamiento</h3>
+                    <ul class="checklist">
+                        <li>Gotas a la hora exacta; constancia diaria.</li>
+                        <li>Esperar 5 min entre una gota y otra; cerrar suave el párpado.</li>
+                        <li>Llevar lista de medicamentos a cada cita.</li>
+                        <li>No faltar a controles de oftalmología y neurología.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Circulación</h3>
+                    <ul class="checklist">
+                        <li>Registrar la presión arterial mañana y noche.</li>
+                        <li>Caminar 30 min, varias veces por semana, según su capacidad.</li>
+                        <li>Dormir con la cabecera elevada 20–30°.</li>
+                        <li>Verduras de hoja verde; moderar la cafeína.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Seguridad con un solo ojo</h3>
+                    <ul class="checklist">
+                        <li>Retirar cables y alfombras sueltas de pasillos.</li>
+                        <li>Buena luz; luces nocturnas y lámpara junto a la cama.</li>
+                        <li>Pasamanos y barras de agarre en escaleras y ducha.</li>
+                        <li>Gafas de protección en tareas con riesgo de golpe.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alarm" style="margin-top:16px">
+                <h3>Acudir a urgencias si aparece</h3>
+                <ul>
+                    <li>Dolor ocular intenso o el ojo “duro”, con enrojecimiento marcado.</li>
+                    <li>Pérdida brusca de visión en el ojo izquierdo.</li>
+                    <li>Dolor de cabeza intenso con náuseas o vómito.</li>
+                    <li>Cualquier síntoma neurológico nuevo y súbito.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 8. PREGUNTAS -->
+        <section id="preguntas">
+            <div class="sec-head"><span class="sec-num">8</span>
+                <h2>Preguntas para la consulta</h2>
+            </div>
+            <div class="qlist">
+                <div class="q"><span class="num">1</span><span>¿La SLT del ojo izquierdo es de bajo riesgo en su caso?
+                        ¿Cuántas veces se puede repetir?</span></div>
+                <div class="q"><span class="num">2</span><span>¿Vale la pena un MAPA de 24 h y ajustar el horario de los
+                        antihipertensivos para no bajar la presión de noche?</span></div>
+                <div class="q"><span class="num">3</span><span>¿Conviene tratar la apnea del sueño para proteger el
+                        nervio óptico?</span></div>
+                <div class="q"><span class="num">4</span><span>¿Es razonable la nicotinamida como complemento, y a qué
+                        dosis?</span></div>
+                <div class="q"><span class="num">5</span><span>Para el ojo derecho, si hay dolor o presión alta, ¿la
+                        ciclofotocoagulación micropulso sería menos invasiva que la válvula?</span></div>
+                <div class="q"><span class="num">6</span><span>¿Qué señales en casa indican que el ojo izquierdo está
+                        empeorando?</span></div>
+            </div>
+            <p class="lead" style="margin-top:18px">Por tratarse de un ojo único funcional y un caso complejo, pedir una
+                <b>segunda opinión</b> con un especialista en glaucoma es completamente apropiado.</p>
+        </section>
+
+        <!-- 9. REFS -->
+        <section id="referencias">
+            <div class="sec-head"><span class="sec-num">9</span>
+                <h2>Referencias y enlaces</h2>
+            </div>
+            <p class="lead">Estudios y fuentes consultadas (información general). Cada enlace abre la fuente original.
+            </p>
+            <div class="refs">
+                <h3>Láser SLT</h3>
+                <div class="r">Ensayo LiGHT, 6 años (resumen). <a
+                        href="https://www.hcplive.com/view/selective-laser-trabeculoplasty-clinically-effective-long-term-glaucoma-management"
+                        target="_blank" rel="noopener">hcplive.com</a></div>
+                <div class="r">LiGHT 6 años (Ophthalmology). <a
+                        href="https://www.sciencedirect.com/science/article/pii/S0161642022007321" target="_blank"
+                        rel="noopener">sciencedirect.com</a></div>
+                <div class="r">Revisión sistemática de SLT (2025). <a
+                        href="https://www.sciencedirect.com/science/article/pii/S1572100025002753" target="_blank"
+                        rel="noopener">sciencedirect.com</a></div>
+                <h3>Presión arterial y nervio óptico</h3>
+                <div class="r">Presión arterial y progresión del glaucoma (2024). <a
+                        href="https://academic.oup.com/ajh/article/37/3/179/7444792" target="_blank"
+                        rel="noopener">academic.oup.com</a></div>
+                <div class="r">Hipotensión nocturna y daño del campo visual. <a
+                        href="https://www.healio.com/news/optometry/20190429/nocturnal-hypotension-associated-with-visual-field-damage-in-normal-tension-glaucoma"
+                        target="_blank" rel="noopener">healio.com</a></div>
+                <div class="r">Caídas de presión y progresión (PMC). <a
+                        href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9705350/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <h3>Neuroprotección</h3>
+                <div class="r">Ensayo de nicotinamida (medRxiv). <a
+                        href="https://www.medrxiv.org/content/10.1101/2020.01.28.20019075v2" target="_blank"
+                        rel="noopener">medrxiv.org</a></div>
+                <div class="r">Nicotinamida y piruvato (JAMA Ophthalmol). <a
+                        href="https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2786482" target="_blank"
+                        rel="noopener">jamanetwork.com</a></div>
+                <h3>Ojo derecho</h3>
+                <div class="r">Manejo del glaucoma neovascular (AAO). <a
+                        href="https://www.aao.org/eyenet/article/diagnosis-and-management-of-neovascular-glaucoma"
+                        target="_blank" rel="noopener">aao.org</a></div>
+                <div class="r">Actualización en glaucoma neovascular (PMC). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12507170/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">Anti-VEGF en glaucoma neovascular (BMC). <a
+                        href="https://bmcophthalmol.biomedcentral.com/articles/10.1186/s12886-016-0327-9"
+                        target="_blank" rel="noopener">biomedcentral.com</a></div>
+                <div class="r">Oclusión venosa de la retina (Cleveland Clinic). <a
+                        href="https://my.clevelandclinic.org/health/diseases/14206-retinal-vein-occlusion-rvo"
+                        target="_blank" rel="noopener">clevelandclinic.org</a></div>
+                <h3>Estilo de vida</h3>
+                <div class="r">Estilo de vida en glaucoma (Glaucoma Research Foundation). <a
+                        href="https://glaucoma.org/articles/exercise-diet-and-other-lifestyle-changes-for-people-living-with-glaucoma"
+                        target="_blank" rel="noopener">glaucoma.org</a></div>
+                <div class="r">Dieta y hábitos (BrightFocus). <a
+                        href="https://www.brightfocus.org/resource/diet-exercise-and-other-habits-that-may-help-reduce-glaucoma-risk/"
+                        target="_blank" rel="noopener">brightfocus.org</a></div>
+                <div class="r">Estilo de vida en glaucoma, revisión (PMC 2025). <a
+                        href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12608359/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="wrap">Documento informativo preparado como apoyo. Verifica siempre la información con el equipo
+            médico tratante.<div class="divider" style="max-width:200px;margin:14px auto 0;background:#2a4f5a"></div>
+        </div>
+    </footer>
+
+    <script>
+        /* ============ CHARTS ============ */
+        const teal = '#1f4e5f', sand = '#d29a4e', danger = '#b0413e', okc = '#3f7d5c';
+        Chart.defaults.font.family = "'Mulish',sans-serif";
+        Chart.defaults.color = "#5e533f";
+
+        new Chart(document.getElementById('iopChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Ojo derecho', 'Ojo izquierdo'],
+                datasets: [{ label: 'Presión (mmHg)', data: [28, 23], backgroundColor: [danger, teal], borderRadius: 8, barThickness: 64 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: c => c.parsed.y + ' mmHg' } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true, suggestedMax: 32, title: { display: true, text: 'mmHg' },
+                        grid: { color: '#eee2cf' }
+                    }, x: { grid: { display: false } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('cupChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Nervio sano', 'Ojo izquierdo', 'Ojo derecho'],
+                datasets: [{ label: 'CUP', data: [0.3, 0.95, 0.99], backgroundColor: [okc, teal, danger], borderRadius: 8, barThickness: 54 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: c => 'CUP ' + c.parsed.y } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true, max: 1, title: { display: true, text: 'relación copa / disco' },
+                        grid: { color: '#eee2cf' }
+                    }, x: { grid: { display: false } }
+                }
+            }
+        });
+
+        /* ============ 3D EYE (Three.js) ============ */
+        (function () {
+            const canvas = document.getElementById('eyeCanvas');
+            const stage = canvas.parentElement;
+            let W = stage.clientWidth, H = 460;
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(W, H, false);
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.05;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+            camera.position.set(0, 0, 6.2);
+
+            /* ---- procedural textures for a prettier eye ---- */
+            function makeEnv() {
+                const w = 256, h = 128, cv = document.createElement('canvas'); cv.width = w; cv.height = h; const x = cv.getContext('2d');
+                const g = x.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#cdd9df'); g.addColorStop(.45, '#7f97a1'); g.addColorStop(.52, '#dfe9ed');
+                g.addColorStop(.62, '#5d727c'); g.addColorStop(1, '#16222a');
+                x.fillStyle = g; x.fillRect(0, 0, w, h);
+                x.fillStyle = 'rgba(255,255,255,.85)'; x.fillRect(w * .12, h * .18, w * .12, h * .22);
+                const t = new THREE.CanvasTexture(cv); t.mapping = THREE.EquirectangularReflectionMapping; t.encoding = THREE.sRGBEncoding; return t;
+            }
+            function makeIris() {
+                const s = 512, cv = document.createElement('canvas'); cv.width = cv.height = s; const x = cv.getContext('2d');
+                const cx = s / 2, cy = s / 2;
+                const g = x.createRadialGradient(cx, cy, s * .07, cx, cy, s * .5);
+                g.addColorStop(0, '#150d04'); g.addColorStop(.18, '#3c2611'); g.addColorStop(.5, '#6f4a22');
+                g.addColorStop(.78, '#9c7034'); g.addColorStop(.93, '#5c3d1c'); g.addColorStop(1, '#1c1005');
+                x.fillStyle = g; x.beginPath(); x.arc(cx, cy, s * .5, 0, 7); x.fill();
+                for (let i = 0; i < 560; i++) {
+                    const a = Math.random() * Math.PI * 2, r0 = s * .10 + Math.random() * s * .05,
+                    r1 = s * .47 * (.65 + Math.random() * .35), wob = (Math.random() - .5) * .14, L = Math.random();
+                    x.beginPath(); x.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0);
+                    x.lineTo(cx + Math.cos(a + wob) * r1, cy + Math.sin(a + wob) * r1);
+                    x.strokeStyle = 'rgba(' + ((120 + L * 120) | 0) + ',' + ((80 + L * 70) | 0) + ',' + ((30 + L * 45) | 0) + ',' + (.05 + Math.random() * .2) + ')';
+                    x.lineWidth = .5 + Math.random() * 1.4; x.stroke();
+                }
+                for (let i = 0; i < 150; i++) {
+                    const a = Math.random() * Math.PI * 2, r = s * .14 + Math.random() * s * .3;
+                    x.beginPath(); x.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, Math.random() * 1.7, 0, 7);
+                    x.fillStyle = 'rgba(225,185,95,' + (.05 + Math.random() * .18) + ')'; x.fill();
+                }
+                x.beginPath(); x.arc(cx, cy, s * .205, 0, 7); x.strokeStyle = 'rgba(50,32,12,.45)'; x.lineWidth = 7; x.stroke();
+                x.beginPath(); x.arc(cx, cy, s * .475, 0, 7); x.strokeStyle = 'rgba(20,12,5,.6)'; x.lineWidth = 14; x.stroke();
+                const pg = x.createRadialGradient(cx, cy, 2, cx, cy, s * .11);
+                pg.addColorStop(0, '#000'); pg.addColorStop(.82, '#000'); pg.addColorStop(1, '#160d05');
+                x.fillStyle = pg; x.beginPath(); x.arc(cx, cy, s * .11, 0, 7); x.fill();
+                const t = new THREE.CanvasTexture(cv); t.anisotropy = 4; t.encoding = THREE.sRGBEncoding; return t;
+            }
+            function makeSclera() {
+                const s = 512, cv = document.createElement('canvas'); cv.width = cv.height = s; const x = cv.getContext('2d');
+                x.fillStyle = '#f5f0e6'; x.fillRect(0, 0, s, s);
+                for (let i = 0; i < 70; i++) {
+                    let px = Math.random() * s, py = Math.random() * s, a = Math.random() * 7;
+                    x.beginPath(); x.moveTo(px, py);
+                    for (let j = 0; j < 6; j++) { a += (Math.random() - .5) * .8; px += Math.cos(a) * 7; py += Math.sin(a) * 7; x.lineTo(px, py); }
+                    x.strokeStyle = 'rgba(198,86,76,' + (.03 + Math.random() * .06) + ')'; x.lineWidth = .7; x.stroke();
+                }
+                const t = new THREE.CanvasTexture(cv); t.encoding = THREE.sRGBEncoding; return t;
+            }
+            const ENV = makeEnv(), IRIS = makeIris(), SCLERA = makeSclera();
+
+            scene.add(new THREE.AmbientLight(0xcde0e6, 0.42));
+            const d1 = new THREE.DirectionalLight(0xffffff, 1.0); d1.position.set(4, 5, 6); scene.add(d1);
+            const d2 = new THREE.DirectionalLight(0xbfe0ea, 0.45); d2.position.set(-5, -2, 3); scene.add(d2);
+            const rim = new THREE.PointLight(0xe7b46a, 0.7, 40); rim.position.set(-3, 2, -5); scene.add(rim);
+
+            const eye = new THREE.Group(); scene.add(eye);
+
+            // Sclera (eyeball) with subtle veins
+            const sclera = new THREE.Mesh(
+                new THREE.SphereGeometry(1.55, 72, 72),
+                new THREE.MeshStandardMaterial({ map: SCLERA, color: 0xf4ede0, roughness: .45, metalness: 0 })
+            );
+            eye.add(sclera);
+
+            // Iris: procedural fiber texture, curved to match the eyeball.
+            // Vertices are pushed onto a sphere of the same radius as the sclera,
+            // then the whole mesh is translated forward so it sits clearly in front
+            // of the sclera (avoids z-fighting). UVs stay planar (from the original
+            // CircleGeometry) so the texture reads correctly from the front.
+            const irisGeo = new THREE.CircleGeometry(0.62, 64);
+            {
+                const pos = irisGeo.attributes.position;
+                const R = 1.55;
+                for (let i = 0; i < pos.count; i++) {
+                    const x = pos.getX(i), y = pos.getY(i);
+                    pos.setZ(i, Math.sqrt(Math.max(0, R * R - x * x - y * y)));
+                }
+                pos.needsUpdate = true;
+                irisGeo.computeVertexNormals();
+            }
+            const iris = new THREE.Mesh(irisGeo,
+                new THREE.MeshStandardMaterial({ map: IRIS, roughness: .55, metalness: .05, side: THREE.DoubleSide }));
+            iris.position.z = 0.07;
+            eye.add(iris);
+
+            // Cornea dome: clear glossy bulge over the iris
+            const cornea = new THREE.Mesh(
+                new THREE.SphereGeometry(0.9, 64, 64, 0, Math.PI * 2, 0, Math.PI * 0.46),
+                new THREE.MeshPhysicalMaterial({
+                    color: 0xffffff, transparent: true, opacity: .15, roughness: .05, metalness: 0,
+                    clearcoat: 1, clearcoatRoughness: .05, reflectivity: .5, envMap: ENV, envMapIntensity: .4, depthWrite: false
+                }));
+            cornea.rotation.x = -Math.PI / 2; cornea.position.z = 1.05; cornea.scale.set(1, 0.78, 1); eye.add(cornea);
+
+            // Catchlights (specular highlights)
+            function makeGlow() {
+                const s = 128, cv = document.createElement('canvas'); cv.width = cv.height = s; const x = cv.getContext('2d');
+                const g = x.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+                g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(.4, 'rgba(255,255,255,.6)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+                x.fillStyle = g; x.fillRect(0, 0, s, s); return new THREE.CanvasTexture(cv);
+            }
+            const GLOW = makeGlow();
+            const c1 = new THREE.Sprite(new THREE.SpriteMaterial({ map: GLOW, transparent: true, opacity: .9, depthWrite: false }));
+            c1.scale.set(.30, .30, 1); c1.position.set(-0.22, 0.26, 1.82); eye.add(c1);
+            const c2 = new THREE.Sprite(new THREE.SpriteMaterial({ map: GLOW, transparent: true, opacity: .5, depthWrite: false }));
+            c2.scale.set(.13, .13, 1); c2.position.set(-0.10, 0.13, 1.82); eye.add(c2);
+
+            // Lens (internal, behind iris)
+            const lens = new THREE.Mesh(new THREE.SphereGeometry(0.30, 32, 32),
+                new THREE.MeshStandardMaterial({ color: 0xeaf3f5, roughness: .2, metalness: 0, transparent: true, opacity: .5 }));
+            lens.scale.set(1, 1, 0.5); lens.position.z = 1.15; eye.add(lens);
+
+            // Optic nerve at the back
+            const nerve = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.48, 1.5, 32),
+                new THREE.MeshStandardMaterial({ color: 0xefc7b6, roughness: .7 }));
+            nerve.rotation.x = Math.PI / 2; nerve.position.z = -2.1; eye.add(nerve);
+
+            // ---- Markers ----
+            const markerMat = () => new THREE.MeshStandardMaterial({ color: 0xd29a4e, emissive: 0xd29a4e, emissiveIntensity: .55, roughness: .4 });
+            function mk(pos) { const m = new THREE.Mesh(new THREE.SphereGeometry(0.08, 18, 18), markerMat()); m.position.set(pos.x, pos.y, pos.z); eye.add(m); return m; }
+
+            const concepts = [
+                {
+                    key: 'general', label: 'Vista general', rot: { x: -0.12, y: 0.18 }, marker: null,
+                    title: 'Un vistazo general',
+                    text: 'El ojo es como una cámara: la luz entra por la córnea y la pupila, pasa por el cristalino y llega a la retina, que manda la imagen al cerebro por el nervio óptico. El glaucoma daña ese nervio.'
+                },
+                {
+                    key: 'cornea', label: 'Córnea y pupila', pos: { x: 0.0, y: 0.0, z: 1.62 }, rot: { x: 0, y: 0 },
+                    title: 'Córnea, pupila e iris',
+                    text: 'Por aquí entra la luz. En tu mamá se hizo una iridotomía (un pequeño orificio con láser) en ambos ojos para mejorar el paso del líquido cuando los ángulos estaban estrechos.'
+                },
+                {
+                    key: 'angle', label: 'Ángulo de drenaje', pos: { x: 0.50, y: 0.0, z: 1.55 }, rot: { x: 0, y: -0.7 },
+                    title: 'El ángulo de drenaje (la \u201Ccañería\u201D del ojo)',
+                    text: 'En el borde entre la córnea y el iris, el líquido del ojo se drena. Si esa \u201Ccañería\u201D se cierra o falla, la presión sube y daña el nervio. En el ojo derecho el ángulo está cerrado; en el izquierdo está abierto — por eso allí funciona el láser SLT.'
+                },
+                {
+                    key: 'lens', label: 'Cristalino', pos: { x: 0.0, y: -0.30, z: 1.55 }, rot: { x: 0, y: 0 },
+                    title: 'El cristalino',
+                    text: 'La lente natural del ojo. Con la edad se vuelve opaca (catarata), algo que también está presente en este caso.'
+                },
+                {
+                    key: 'retina', label: 'Retina', pos: { x: 0.0, y: -0.55, z: -1.45 }, rot: { x: 0.5, y: 0.2 },
+                    title: 'La retina y sus vasos',
+                    text: 'Capa que capta la imagen. En el ojo derecho se obstruyó una vena de la retina (\u201Cinfarto ocular\u201D): eso provocó hemorragias y el crecimiento de vasos anormales que llevaron al glaucoma neovascular, el más agresivo.'
+                },
+                {
+                    key: 'nerve', label: 'Nervio óptico', pos: { x: 0.0, y: 0.0, z: -1.55 }, rot: { x: 0.15, y: 0.0 }, front: false,
+                    title: 'El nervio óptico (lo que el glaucoma daña)',
+                    text: 'Lleva la imagen al cerebro. El glaucoma destruye sus fibras de forma irreversible. La \u201Cexcavación\u201D (CUP) mide ese daño: 0.99 en el ojo derecho y 0.95 en el izquierdo, frente a ~0.3 de un nervio sano.'
+                }
+            ];
+
+            // create markers
+            concepts.forEach(c => { if (c.pos) { c.markerMesh = mk(c.pos); } });
+
+            // labels
+            const labels = {};
+            concepts.forEach(c => {
+                if (c.pos) {
+                    const el = document.createElement('div'); el.className = 'eye-label';
+                    el.innerHTML = '<span class="dot"></span>' + c.label; stage.appendChild(el); labels[c.key] = el;
+                }
+            });
+
+            // concept buttons
+            const bar = document.getElementById('conceptBar');
+            const panel = document.getElementById('conceptPanel');
+            let active = 'general';
+            concepts.forEach(c => {
+                const b = document.createElement('button'); b.className = 'cbtn' + (c.key === 'general' ? ' active' : '');
+                b.textContent = c.label; b.onclick = () => setConcept(c.key, b); bar.appendChild(b); c.btn = b;
+            });
+            function setConcept(key, btn) {
+                active = key;
+                document.querySelectorAll('.cbtn').forEach(x => x.classList.remove('active'));
+                btn.classList.add('active');
+                const c = concepts.find(x => x.key === key);
+                targetRot.x = c.rot.x; targetRot.y = c.rot.y; autoRotate = false;
+                panel.innerHTML = '<h3>' + c.title + '</h3><p>' + c.text + '</p>';
+                concepts.forEach(o => {
+                    if (o.markerMesh) {
+                        const on = (o.key === key);
+                        o.markerMesh.material.emissiveIntensity = on ? 1.0 : 0.35;
+                        o.markerMesh.scale.setScalar(on ? 1.7 : 1);
+                    }
+                });
+            }
+
+            // interaction
+            let autoRotate = true, dragging = false, hovered = false, px = 0, py = 0;
+            const rot = { x: -0.12, y: 0.18 }, targetRot = { x: -0.12, y: 0.18 };
+            canvas.addEventListener('pointerenter', () => { hovered = true; });
+            canvas.addEventListener('pointerdown', e => { dragging = true; hovered = true; autoRotate = false; px = e.clientX; py = e.clientY; canvas.setPointerCapture(e.pointerId) });
+            canvas.addEventListener('pointermove', e => { if (!dragging) return; targetRot.y += (e.clientX - px) * 0.01; targetRot.x += (e.clientY - py) * 0.01; targetRot.x = Math.max(-1.2, Math.min(1.2, targetRot.x)); px = e.clientX; py = e.clientY; });
+            canvas.addEventListener('pointerup', () => { dragging = false; });
+            canvas.addEventListener('pointerleave', () => { dragging = false; hovered = false; });
+
+            function resize() { W = stage.clientWidth; renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); }
+            window.addEventListener('resize', resize); resize();
+
+            const tmp = new THREE.Vector3();
+            function project(mesh) {
+                mesh.getWorldPosition(tmp); const wz = tmp.z; tmp.project(camera);
+                return { x: (tmp.x * 0.5 + 0.5) * W, y: (-tmp.y * 0.5 + 0.5) * H, wz };
+            }
+            function loop() {
+                requestAnimationFrame(loop);
+                if (autoRotate) targetRot.y += 0.0045;
+                rot.x += (targetRot.x - rot.x) * 0.08; rot.y += (targetRot.y - rot.y) * 0.08;
+                eye.rotation.x = rot.x; eye.rotation.y = rot.y;
+                renderer.render(scene, camera);
+                // labels — only visible while the eye is hovered or being dragged
+                const show = hovered || dragging;
+                concepts.forEach(c => {
+                    if (c.markerMesh) {
+                        const p = project(c.markerMesh); const el = labels[c.key];
+                        el.style.left = p.x + 'px'; el.style.top = p.y + 'px';
+                        const facing = p.wz > -0.2; // in front-ish
+                        const baseOp = (active === c.key) ? 1 : (facing ? 0.85 : 0.12);
+                        el.style.opacity = show ? baseOp : 0;
+                        el.style.zIndex = (active === c.key) ? 5 : 1;
+                    }
+                });
+            }
+            loop();
+            // start idle after a moment if user hasn't picked
+            setTimeout(() => { if (active === 'general') autoRotate = true; }, 300);
+        })();
+
+        /* ============ VISION SIMULATOR — 3 columns sharing one scene & camera ============ */
+        (function () {
+            const cols = Array.from(document.querySelectorAll('.sim-col'));
+            if (!cols.length) return;
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1b2d34);
+            scene.fog = new THREE.Fog(0x1b2d34, 16, 34);
+            const cam = new THREE.PerspectiveCamera(55, 1, 0.1, 120);
+            const M = (c, ro, me) => new THREE.MeshStandardMaterial({ color: c, roughness: ro == null ? .9 : ro, metalness: me || 0 });
+
+            const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), M(0x7c5132, .95)); floor.rotation.x = -Math.PI / 2; scene.add(floor);
+            const rug = new THREE.Mesh(new THREE.PlaneGeometry(7, 4.4), M(0xb05a44, .95)); rug.rotation.x = -Math.PI / 2; rug.position.set(0, .02, -1.2); scene.add(rug);
+            const wall = new THREE.Mesh(new THREE.PlaneGeometry(40, 18), M(0xd9c3a3, 1)); wall.position.set(0, 9, -6); scene.add(wall);
+            const lwall = new THREE.Mesh(new THREE.PlaneGeometry(24, 18), M(0xccb695, 1)); lwall.rotation.y = Math.PI / 2; lwall.position.set(-9, 9, 6); scene.add(lwall);
+
+            const winPane = new THREE.Mesh(new THREE.PlaneGeometry(5, 3.4), new THREE.MeshBasicMaterial({ color: 0xfff1d2 })); winPane.position.set(3.4, 4.3, -5.94); scene.add(winPane);
+            const fr = new THREE.Mesh(new THREE.BoxGeometry(5.4, 3.8, .22), M(0x4a3526, .8)); fr.position.set(3.4, 4.3, -6.04); scene.add(fr);
+            const bV = new THREE.Mesh(new THREE.BoxGeometry(.12, 3.4, .14), M(0x4a3526, .8)); bV.position.set(3.4, 4.3, -5.9); scene.add(bV);
+            const bH = new THREE.Mesh(new THREE.BoxGeometry(5, .12, .14), M(0x4a3526, .8)); bH.position.set(3.4, 4.3, -5.9); scene.add(bH);
+
+            const pic = new THREE.Mesh(new THREE.BoxGeometry(2, 1.4, .12), M(0x3a2a1c, .7)); pic.position.set(-3.4, 4.7, -5.9); scene.add(pic);
+            const picImg = new THREE.Mesh(new THREE.PlaneGeometry(1.7, 1.1), M(0x7f99ab, .6)); picImg.position.set(-3.4, 4.7, -5.83); scene.add(picImg);
+
+            const top = new THREE.Mesh(new THREE.BoxGeometry(3.4, .22, 1.7), M(0x6e4423, .55)); top.position.set(0, 1.4, -1.2); scene.add(top);
+            [[-1.45, -.65], [1.45, -.65], [-1.45, .65], [1.45, .65]].forEach(p => { const l = new THREE.Mesh(new THREE.BoxGeometry(.18, 1.4, .18), M(0x5a3618, .6)); l.position.set(p[0], .7, -1.2 + p[1]); scene.add(l); });
+
+            const vase = new THREE.Mesh(new THREE.CylinderGeometry(.28, .18, .72, 20), M(0x2f6079, .4, .1)); vase.position.set(0, 1.86, -1.2); scene.add(vase);
+            const fcol = [0xe06666, 0xf4c542, 0xde7ab0];
+            for (let i = 0; i < 5; i++) {
+                const a = i / 5 * Math.PI * 2;
+                const stem = new THREE.Mesh(new THREE.CylinderGeometry(.02, .02, .7, 6), M(0x3f7a3a, .8)); stem.position.set(Math.cos(a) * .12, 2.3, -1.2 + Math.sin(a) * .12); scene.add(stem);
+                const fl = new THREE.Mesh(new THREE.SphereGeometry(.13, 16, 16), M(fcol[i % 3], .6)); fl.position.set(Math.cos(a) * .18, 2.66, -1.2 + Math.sin(a) * .18); scene.add(fl);
+            }
+
+            function chair(x, z, ry) {
+                const g = new THREE.Group();
+                const seat = new THREE.Mesh(new THREE.BoxGeometry(1, .16, 1), M(0x6b4626, .6)); seat.position.set(0, .9, 0); g.add(seat);
+                const back = new THREE.Mesh(new THREE.BoxGeometry(1, 1, .16), M(0x6b4626, .6)); back.position.set(0, 1.45, -.42); g.add(back);
+                [[-.42, -.42], [.42, -.42], [-.42, .42], [.42, .42]].forEach(p => { const l = new THREE.Mesh(new THREE.BoxGeometry(.12, .9, .12), M(0x523417, .6)); l.position.set(p[0], .45, p[1]); g.add(l); });
+                g.position.set(x, 0, z); g.rotation.y = ry; scene.add(g);
+            }
+            chair(0, 0.7, Math.PI); chair(0, -3.0, 0);
+
+            const lampPole = new THREE.Mesh(new THREE.CylinderGeometry(.05, .05, 3.2, 12), M(0x3a3a3a, .4, .3)); lampPole.position.set(-3.6, 1.6, -0.4); scene.add(lampPole);
+            const shade = new THREE.Mesh(new THREE.ConeGeometry(.62, .72, 24, 1, true), new THREE.MeshStandardMaterial({ color: 0xf2dca6, roughness: .6, side: THREE.DoubleSide, emissive: 0x5a4520, emissiveIntensity: .5 })); shade.position.set(-3.6, 3.35, -0.4); scene.add(shade);
+            const bulb = new THREE.Mesh(new THREE.SphereGeometry(.12, 12, 12), new THREE.MeshBasicMaterial({ color: 0xfff0cf })); bulb.position.set(-3.6, 3.1, -0.4); scene.add(bulb);
+
+            const pot = new THREE.Mesh(new THREE.CylinderGeometry(.42, .32, .6, 16), M(0x9a6a3a, .85)); pot.position.set(3.9, .3, 0.6); scene.add(pot);
+            const foli = new THREE.Mesh(new THREE.SphereGeometry(.8, 16, 16), M(0x3f6b3a, .9)); foli.position.set(3.9, 1.25, 0.6); foli.scale.set(1, 1.3, 1); scene.add(foli);
+
+            scene.add(new THREE.AmbientLight(0xffe6c4, .55));
+            scene.add(new THREE.HemisphereLight(0xfff0d8, 0x4a3a2a, .5));
+            const key = new THREE.DirectionalLight(0xfff0d0, 1.1); key.position.set(4, 6, -2); scene.add(key);
+            const pl1 = new THREE.PointLight(0xffcf8a, 0.9, 18); pl1.position.set(-3.6, 3.1, -0.4); scene.add(pl1);
+            const pl2 = new THREE.PointLight(0xfff2d6, 0.8, 24); pl2.position.set(3.4, 4, -4); scene.add(pl2);
+
+            // Build one renderer per column, all sharing scene + camera.
+            // Filters chosen to match the clinical case:
+            //  - tunnel: OI 20/25 → centro nítido, sólo se pierde el campo periférico.
+            //  - blind: OD percibe movimiento de manos → siluetas muy borrosas, tinte
+            //    rojizo por hemorragias del fondo y escotomas dispersos (neovascular).
+            const tunnelBg = 'radial-gradient(circle at 50% 48%, rgba(8,12,14,0) 9%, rgba(8,12,14,.18) 16%, rgba(6,9,11,.985) 30%)';
+            const blindBg = [
+                'radial-gradient(ellipse 22% 18% at 30% 28%, rgba(60,10,10,.55) 0%, rgba(60,10,10,0) 70%)',
+                'radial-gradient(ellipse 26% 20% at 70% 64%, rgba(40,12,5,.55) 0%, rgba(40,12,5,0) 70%)',
+                'radial-gradient(ellipse 18% 14% at 55% 38%, rgba(20,5,2,.45) 0%, rgba(20,5,2,0) 70%)',
+                'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 28%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.85) 100%)'
+            ].join(',');
+            const views = cols.map(col => {
+                const canvas = col.querySelector('canvas');
+                const ov = col.querySelector('.vis-ov');
+                const r = new THREE.WebGLRenderer({ canvas, antialias: true });
+                r.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                r.outputEncoding = THREE.sRGBEncoding;
+                r.toneMapping = THREE.ACESFilmicToneMapping;
+                r.toneMappingExposure = 1.12;
+                const mode = col.dataset.mode;
+                if (mode === 'tunnel') {
+                    ov.style.background = tunnelBg;
+                    canvas.style.filter = 'saturate(.92)';
+                } else if (mode === 'blind') {
+                    ov.style.background = blindBg;
+                    canvas.style.filter = 'blur(9px) brightness(.55) contrast(.85) saturate(.3) sepia(.3) hue-rotate(-18deg)';
+                }
+                return { canvas, r };
+            });
+
+            const target = new THREE.Vector3(0, 1.7, -1.6);
+            let dragYaw = 0, dragPitch = 0, panOn = true, t = 0;
+            const RAD = 6.6;
+            function place() {
+                const theta = dragYaw + (panOn ? Math.sin(t * 0.16) * 0.55 : 0);
+                const phi = Math.max(0.95, Math.min(1.48, 1.30 + dragPitch));
+                cam.position.set(
+                    target.x + RAD * Math.sin(phi) * Math.sin(theta),
+                    target.y + RAD * Math.cos(phi),
+                    target.z + RAD * Math.sin(phi) * Math.cos(theta));
+                cam.lookAt(target);
+            }
+
+            // Drag on any canvas rotates the shared camera
+            let drag = false, px = 0, py = 0;
+            views.forEach(v => {
+                v.canvas.addEventListener('pointerdown', e => { drag = true; px = e.clientX; py = e.clientY; v.canvas.setPointerCapture(e.pointerId); });
+                v.canvas.addEventListener('pointermove', e => {
+                    if (!drag) return;
+                    dragYaw -= (e.clientX - px) * 0.005;
+                    dragPitch -= (e.clientY - py) * 0.004;
+                    dragYaw = Math.max(-0.95, Math.min(0.95, dragYaw));
+                    dragPitch = Math.max(-0.22, Math.min(0.22, dragPitch));
+                    px = e.clientX; py = e.clientY;
+                });
+                const stop = () => { drag = false; };
+                v.canvas.addEventListener('pointerup', stop);
+                v.canvas.addEventListener('pointerleave', stop);
+            });
+
+            function resize() {
+                views.forEach(v => {
+                    const w = v.canvas.clientWidth, h = v.canvas.clientHeight;
+                    v.r.setSize(w, h, false);
+                });
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            let last = performance.now();
+            (function loop() {
+                requestAnimationFrame(loop);
+                const now = performance.now();
+                t += (now - last) / 1000;
+                last = now;
+                place();
+                views.forEach(v => {
+                    const w = v.canvas.clientWidth, h = v.canvas.clientHeight;
+                    if (cam.aspect !== w / h) { cam.aspect = w / h; cam.updateProjectionMatrix(); }
+                    v.r.render(scene, cam);
+                });
+            })();
+
+            const pt = document.getElementById('panToggle');
+            if (pt) pt.onclick = () => { panOn = !panOn; pt.textContent = panOn ? '⏸ Pausar paneo' : '▶ Reanudar paneo'; };
+        })();
+    </script>
+</body>
+
+</html>
