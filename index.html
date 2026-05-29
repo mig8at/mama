@@ -987,6 +987,275 @@
             }
         }
 
+        /* ===== Panel de validación (semáforo) ===== */
+        .gauge-intro {
+            background: linear-gradient(180deg, #fffaf0 0%, #fbf4e3 100%);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px 20px;
+            margin: 22px 0 14px;
+            display: flex;
+            gap: 16px;
+            align-items: center
+        }
+
+        .gauge-intro .legend {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .gauge-intro .lg {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 13px
+        }
+
+        .gauge-intro .lg .sw {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            display: inline-block
+        }
+
+        .sw.green {
+            background: #5fb27a
+        }
+
+        .sw.yellow {
+            background: #e6b658
+        }
+
+        .sw.red {
+            background: #c25d5a
+        }
+
+        .gauge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px
+        }
+
+        @media (max-width:760px) {
+            .gauge-grid {
+                grid-template-columns: 1fr
+            }
+
+            .gauge-intro {
+                flex-direction: column;
+                align-items: flex-start
+            }
+        }
+
+        .gauge {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 1px 0 rgba(31, 78, 95, .03)
+        }
+
+        .gauge-title {
+            font-family: var(--display);
+            font-weight: 600;
+            color: var(--sea);
+            font-size: 19px;
+            margin-bottom: 4px
+        }
+
+        .gauge-sub {
+            color: #6c6253;
+            font-size: 13px;
+            margin-bottom: 14px
+        }
+
+        .gauge-row {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px
+        }
+
+        .gauge-eye {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--ink)
+        }
+
+        .gauge-track {
+            position: relative;
+            height: 26px
+        }
+
+        .gauge-zones {
+            display: flex;
+            height: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+        }
+
+        .gz {
+            height: 100%
+        }
+
+        .gz.green {
+            background: #5fb27a
+        }
+
+        .gz.yellow {
+            background: #e6b658
+        }
+
+        .gz.red {
+            background: #c25d5a
+        }
+
+        .gauge-marker {
+            position: absolute;
+            top: -3px;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none
+        }
+
+        .gauge-marker .pin {
+            width: 14px;
+            height: 22px;
+            background: var(--ink);
+            border: 3px solid #fff;
+            border-radius: 7px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .35)
+        }
+
+        .gauge-marker .val {
+            margin-top: 4px;
+            background: var(--ink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 6px;
+            white-space: nowrap
+        }
+
+        .gauge-axis {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #8a7d63;
+            margin-top: 6px
+        }
+
+        .gauge-result {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .status {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+            letter-spacing: .02em
+        }
+
+        .status.green {
+            background: #d6ecdd;
+            color: #1e5a30
+        }
+
+        .status.yellow {
+            background: #f7e3b6;
+            color: #6b4a14
+        }
+
+        .status.red {
+            background: #f1cfcd;
+            color: #6b1f1c
+        }
+
+        /* ===== Galería ilustrada de cuidados ===== */
+        .care-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+            margin-top: 18px
+        }
+
+        .care-item {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 1px 0 rgba(31, 78, 95, .03);
+            transition: transform .2s ease, box-shadow .2s ease;
+            display: flex;
+            flex-direction: column
+        }
+
+        .care-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(31, 78, 95, .12)
+        }
+
+        .care-img {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            background: var(--paper);
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .care-body {
+            padding: 14px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1
+        }
+
+        .care-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: var(--sand-soft);
+            color: var(--sea);
+            font-weight: 800;
+            font-size: 13px
+        }
+
+        .care-title {
+            font-family: var(--display);
+            font-weight: 600;
+            color: var(--sea);
+            font-size: 17px;
+            line-height: 1.25
+        }
+
+        .care-desc {
+            font-size: 13.5px;
+            color: #5e533f;
+            line-height: 1.5
+        }
+
+        .care-desc b {
+            color: var(--ink)
+        }
+
         /* Reduced motion — respect user preference */
         @media (prefers-reduced-motion: reduce) {
 
@@ -1146,6 +1415,514 @@
             </div>
             <p class="muted" style="font-size:13px;margin-top:10px">Representación aproximada con fines educativos; la
                 percepción real de cada persona varía.</p>
+
+            <!-- Medicación sistémica e intolerancias -->
+            <h3 style="margin:32px 0 12px;color:var(--sea)">Medicación sistémica y antecedente de intolerancias</h3>
+            <div class="grid g3">
+                <div class="card">
+                    <span class="tag sea">Actual</span>
+                    <h3>Tratamiento sistémico</h3>
+                    <ul class="checklist">
+                        <li><b>Losartán 50 mg</b>, una vez al día (antihipertensivo).</li>
+                        <li><b>Atorvastatina 20 mg</b> y <b>Aspirina 100 mg</b>, juntos a las <b>5:00 p. m.</b></li>
+                        <li>Indicación: control cardiovascular y prevención neurovascular.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <span class="tag sand">Intolerancias previas</span>
+                    <h3>Por qué no enalapril ni amlodipino</h3>
+                    <ul class="checklist">
+                        <li><b>Enalapril + HCTZ</b> → tos persistente intensa (efecto típico IECA).</li>
+                        <li><b>Amlodipino</b> → edema importante en pies y piernas.</li>
+                        <li>Útil saberlo si se plantea cambiar de antihipertensivo.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <span class="tag green">Síntomas asociados</span>
+                    <h3>Más allá de los ojos</h3>
+                    <ul class="checklist">
+                        <li>Mareos, vértigo, inestabilidad postural.</li>
+                        <li>Hija con <b>síndrome vasovagal neurocardiogénico mixto tipo 1</b> (mesa basculante).</li>
+                        <li>Plantea hipótesis de componente autonómico — ver §6.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Estudios vasculares -->
+            <h3 style="margin:32px 0 12px;color:var(--sea)">Estudios vasculares disponibles</h3>
+            <div class="grid g2">
+                <div class="card tint">
+                    <span class="tag green">21/04/2025 · NORMAL</span>
+                    <h3>Doppler de vasos del cuello</h3>
+                    <p>Carótidas sin placas ni estenosis; velocidades dentro de rangos normales; vertebrales con flujo
+                        anterógrado. <b>Descarta enfermedad carotídea</b> como motor del daño isquémico — apoya la
+                        hipótesis de que el motor principal del daño vascular es la <b>inestabilidad tensional sistémica</b>
+                        y la microcirculación, no una estenosis del cuello.</p>
+                </div>
+                <div class="card tint">
+                    <span class="tag sand">06/04/2023 · Variante anatómica</span>
+                    <h3>Angio-TC: vertebral derecha hipoplásica</h3>
+                    <p>Variante congénita: la perfusión del territorio posterior (tronco cerebral, cerebelo, occipital)
+                        depende casi exclusivamente de la <b>vertebral izquierda</b>. Por sí sola no es peligrosa, pero
+                        combinada con microangiopatía + episodios de hipotensión nocturna severa, <b>refuerza la
+                        importancia de evitar caídas marcadas de presión arterial</b> (ver §6).</p>
+                </div>
+            </div>
+
+            <!-- OCT -->
+            <h3 style="margin:32px 0 12px;color:var(--sea)">OCT Zeiss Cirrus (16/04/2026)</h3>
+            <p class="lead" style="margin-top:-4px">Datos cuantitativos que respaldan los diagnósticos clínicos. El OD
+                tuvo dificultad técnica por opacidad de medios (probable progresión de catarata).</p>
+            <div class="eyes" style="margin-bottom:8px">
+                <div class="hd">&nbsp;</div>
+                <div class="hd">Ojo derecho (OD)</div>
+                <div class="hd">Ojo izquierdo (OI)</div>
+                <div class="rh">Grosor RNFL promedio</div>
+                <div class="od">68 µm</div>
+                <div>61 µm</div>
+                <div class="rh">C/D promedio</div>
+                <div class="od">0.85</div>
+                <div>0.72</div>
+                <div class="rh">C/D vertical</div>
+                <div class="od">0.88</div>
+                <div>0.76</div>
+                <div class="rh">GCL mínimo (céls. ganglionares)</div>
+                <div class="od">no medible</div>
+                <div>66 µm</div>
+                <div class="rh">Intensidad de señal</div>
+                <div class="od">3/10</div>
+                <div>4/10</div>
+            </div>
+            <p class="muted" style="font-size:13px;margin-top:6px">En el OI (ojo útil) el adelgazamiento de la capa de
+                células ganglionares ya está documentado — el daño es estructural, no solo presional. Se realizó además
+                angiografía con fluoresceína del OD el mismo día (12 fases).</p>
+
+            <!-- MAPA -->
+            <h3 style="margin:32px 0 12px;color:var(--sea)">MAPA — Monitoreo Ambulatorio de Presión Arterial (21–22/05/2026)</h3>
+            <p class="lead" style="margin-top:-4px">Realizado por Cardioib SAS tras la remisión urgente desde
+                oftalmología. <b>Es el dato más reciente y el que más matiza el plan general.</b></p>
+
+            <div class="grid g2">
+                <div class="chart-card">
+                    <h3>Tendencia 24 h de presión arterial</h3>
+                    <div class="cap">Sistólica y diastólica a lo largo del día y la noche. La franja amarilla marca el
+                        rango deseable. Observa el pico de las 10:36 y el mínimo de las 02:31.</div>
+                    <div class="chart-box" style="height:300px"><canvas id="mapaChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Distribución diastólica en 24 h</h3>
+                    <div class="cap">El 80% del tiempo la diastólica está por debajo de 60 mmHg — la <b>perfusión del
+                        nervio óptico</b> depende de mantener una diastólica razonable.</div>
+                    <div class="chart-box" style="height:300px"><canvas id="diasHistChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="grid g3" style="margin-top:16px">
+                <div class="card">
+                    <span class="tag green">Informe oficial</span>
+                    <h3>Conclusión formal</h3>
+                    <ul class="checklist">
+                        <li>Promedio 105/55 mmHg → <b>"tensión arterial normal"</b>.</li>
+                        <li>Patrón <b>dipper sistólico y diastólico</b> (–11.2% / –16.1%; rango normal 10–20%).</li>
+                        <li>Carga tensional normal; FC media 59 lpm.</li>
+                    </ul>
+                </div>
+                <div class="card tint">
+                    <span class="tag sand">Lectura clínica</span>
+                    <h3>Lo que el promedio oculta</h3>
+                    <ul class="checklist">
+                        <li><b>Mínimo nocturno 66/35 mmHg</b> a las 02:31 — DPP ocular ≈ 12 mmHg (umbral riesgo &lt;50).</li>
+                        <li><b>Pico diurno 171/147 mmHg</b> a las 10:36 — confirma el "yoyo".</li>
+                        <li>80% del tiempo con diastólica &lt;60; variabilidad diastólica 28%.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <span class="tag sea">Implicación</span>
+                    <h3>Qué cambia en el plan</h3>
+                    <ul class="checklist">
+                        <li>El problema NO es solo la caída nocturna excesiva (el dipper fue normal).</li>
+                        <li>Es una combinación de <b>presión basal baja + picos + mínimos extremos</b>.</li>
+                        <li>Discutir con cardiología <b>horario del losartán</b> (mañana vs noche) y dosis.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Panel de validación semáforo -->
+            <h3 style="margin:36px 0 6px;color:var(--sea)">Panel de validación: cómo se compara cada valor con lo sano</h3>
+            <p class="lead" style="margin-top:-2px">Aproximación visual de cada parámetro contra los rangos clínicos
+                habituales. Los rangos son orientativos — la lectura final siempre la hace el médico tratante, que
+                considera el contexto completo.</p>
+
+            <div class="gauge-intro">
+                <div class="legend">
+                    <span class="lg"><span class="sw green"></span>Rango sano / esperado</span>
+                    <span class="lg"><span class="sw yellow"></span>Zona de alerta / aceptable</span>
+                    <span class="lg"><span class="sw red"></span>Fuera de rango</span>
+                </div>
+            </div>
+
+            <div class="gauge-grid">
+
+                <!-- PIO -->
+                <div class="gauge">
+                    <div class="gauge-title">Presión intraocular (PIO)</div>
+                    <div class="gauge-sub">Sano: por debajo de 21 mmHg. La presión alta es lo que daña el nervio.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo derecho</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:11"></span>
+                                <span class="gz yellow" style="flex:5"></span>
+                                <span class="gz red" style="flex:14"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:60%">
+                                <span class="pin"></span>
+                                <span class="val">28</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo izquierdo</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:11"></span>
+                                <span class="gz yellow" style="flex:5"></span>
+                                <span class="gz red" style="flex:14"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:43%">
+                                <span class="pin"></span>
+                                <span class="val">23</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>10</span><span>21 sano</span><span>26 alerta</span><span>40 mmHg</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">OD · 28 mmHg</span>
+                        <span class="status yellow">OI · 23 mmHg</span>
+                    </div>
+                </div>
+
+                <!-- CUP -->
+                <div class="gauge">
+                    <div class="gauge-title">Excavación del nervio (CUP)</div>
+                    <div class="gauge-sub">Sano: cerca de 0.3. Cuanto más cerca de 1.0, más daño del nervio óptico.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo derecho</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:5"></span>
+                                <span class="gz yellow" style="flex:2"></span>
+                                <span class="gz red" style="flex:3"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:99%">
+                                <span class="pin"></span>
+                                <span class="val">0.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo izquierdo</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:5"></span>
+                                <span class="gz yellow" style="flex:2"></span>
+                                <span class="gz red" style="flex:3"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:95%">
+                                <span class="pin"></span>
+                                <span class="val">0.95</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>0.0</span><span>0.5 sano</span><span>0.7 alerta</span><span>1.0</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">OD · 0.99</span>
+                        <span class="status red">OI · 0.95</span>
+                    </div>
+                </div>
+
+                <!-- RNFL -->
+                <div class="gauge">
+                    <div class="gauge-title">Capa de fibras nerviosas (RNFL)</div>
+                    <div class="gauge-sub">Sano: por encima de 85 µm. Es el espesor del nervio en la retina.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo derecho</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:30"></span>
+                                <span class="gz yellow" style="flex:15"></span>
+                                <span class="gz green" style="flex:25"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:40%">
+                                <span class="pin"></span>
+                                <span class="val">68 µm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo izquierdo</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:30"></span>
+                                <span class="gz yellow" style="flex:15"></span>
+                                <span class="gz green" style="flex:25"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:30%">
+                                <span class="pin"></span>
+                                <span class="val">61 µm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>40</span><span>70 alerta</span><span>85 sano</span><span>110 µm</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">OD · 68 µm</span>
+                        <span class="status red">OI · 61 µm</span>
+                    </div>
+                </div>
+
+                <!-- Visión funcional -->
+                <div class="gauge">
+                    <div class="gauge-title">Agudeza visual funcional</div>
+                    <div class="gauge-sub">Lo que ve cada ojo. El izquierdo es el "útil".</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo derecho</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:25"></span>
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz red" style="flex:50"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:95%">
+                                <span class="pin"></span>
+                                <span class="val">movim. manos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Ojo izquierdo</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:25"></span>
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz red" style="flex:50"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:10%">
+                                <span class="pin"></span>
+                                <span class="val">20/25</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>20/20</span><span>20/40 alerta</span><span>20/200 baja</span><span>sin visión</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">OD · movim. manos</span>
+                        <span class="status green">OI · 20/25 (en túnel)</span>
+                    </div>
+                </div>
+
+                <!-- Sistólica MAPA -->
+                <div class="gauge">
+                    <div class="gauge-title">Sistólica 24 h (MAPA)</div>
+                    <div class="gauge-sub">Óptimo: entre 100 y 130 mmHg. Los extremos son problemáticos.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Promedio</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:21"></span>
+                                <span class="gz yellow" style="flex:7"></span>
+                                <span class="gz green" style="flex:21"></span>
+                                <span class="gz yellow" style="flex:7"></span>
+                                <span class="gz red" style="flex:44"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:32%">
+                                <span class="pin"></span>
+                                <span class="val">105</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Pico diurno</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:21"></span>
+                                <span class="gz yellow" style="flex:7"></span>
+                                <span class="gz green" style="flex:21"></span>
+                                <span class="gz yellow" style="flex:7"></span>
+                                <span class="gz red" style="flex:44"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:79%">
+                                <span class="pin"></span>
+                                <span class="val">171</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>60</span><span>100</span><span>130</span><span>200 mmHg</span></div>
+                    <div class="gauge-result">
+                        <span class="status green">Promedio 105</span>
+                        <span class="status red">Pico 171 (10:36)</span>
+                    </div>
+                </div>
+
+                <!-- Diastólica MAPA -->
+                <div class="gauge">
+                    <div class="gauge-title">Diastólica 24 h (MAPA)</div>
+                    <div class="gauge-sub">Óptimo: entre 70 y 85 mmHg. Diastólica baja = menos sangre al nervio óptico.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Promedio</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:33"></span>
+                                <span class="gz yellow" style="flex:11"></span>
+                                <span class="gz green" style="flex:17"></span>
+                                <span class="gz yellow" style="flex:11"></span>
+                                <span class="gz red" style="flex:28"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:28%">
+                                <span class="pin"></span>
+                                <span class="val">55</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Mínimo nocturno</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:33"></span>
+                                <span class="gz yellow" style="flex:11"></span>
+                                <span class="gz green" style="flex:17"></span>
+                                <span class="gz yellow" style="flex:11"></span>
+                                <span class="gz red" style="flex:28"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:6%">
+                                <span class="pin"></span>
+                                <span class="val">35</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>30</span><span>60</span><span>85</span><span>120 mmHg</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">Promedio 55</span>
+                        <span class="status red">Mínimo 35 (02:31)</span>
+                    </div>
+                </div>
+
+                <!-- Perfusión ocular -->
+                <div class="gauge">
+                    <div class="gauge-title">Presión de perfusión ocular nocturna (DPP)</div>
+                    <div class="gauge-sub">Diferencia entre la diastólica y la PIO. Sano: por encima de 65 mmHg.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Calculada OI</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz red" style="flex:56"></span>
+                                <span class="gz yellow" style="flex:17"></span>
+                                <span class="gz green" style="flex:27"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:13%">
+                                <span class="pin"></span>
+                                <span class="val">~12</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>0</span><span>50 alerta</span><span>65 sano</span><span>90 mmHg</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">~12 mmHg · muy baja perfusión</span>
+                    </div>
+                </div>
+
+                <!-- Apnea IAH -->
+                <div class="gauge">
+                    <div class="gauge-title">Apnea del sueño (IAH)</div>
+                    <div class="gauge-sub">Paradas respiratorias por hora. Sano &lt;5. Moderado a partir de 15 (AASM).</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Estudio</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:10"></span>
+                                <span class="gz yellow" style="flex:20"></span>
+                                <span class="gz red" style="flex:70"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:36%">
+                                <span class="pin"></span>
+                                <span class="val">18</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>0</span><span>5 sano</span><span>15 moderado</span><span>50 IAH</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">IAH 18 · SAHOS moderado</span>
+                    </div>
+                </div>
+
+                <!-- Variabilidad diastólica -->
+                <div class="gauge">
+                    <div class="gauge-title">Variabilidad diastólica (CV%)</div>
+                    <div class="gauge-sub">Mide cuánto "salta" la diastólica en 24 h. Sano &lt;15 %; alta variabilidad daña el nervio.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">CV% diast.</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz green" style="flex:37"></span>
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz red" style="flex:38"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:70%">
+                                <span class="pin"></span>
+                                <span class="val">28 %</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>0 %</span><span>15 %</span><span>25 %</span><span>40 %</span></div>
+                    <div class="gauge-result">
+                        <span class="status red">28 % · variabilidad alta</span>
+                    </div>
+                </div>
+
+                <!-- Patrón circadiano -->
+                <div class="gauge">
+                    <div class="gauge-title">Patrón circadiano (caída nocturna)</div>
+                    <div class="gauge-sub">Caída de la PA al dormir. Sano: 10–20 % (dipper). Menos = riesgo CV; más = riesgo nervio óptico.</div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Sistólica</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz green" style="flex:25"></span>
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz red" style="flex:25"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:28%">
+                                <span class="pin"></span>
+                                <span class="val">11.2 %</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-row">
+                        <div class="gauge-eye">Diastólica</div>
+                        <div class="gauge-track">
+                            <div class="gauge-zones">
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz green" style="flex:25"></span>
+                                <span class="gz yellow" style="flex:25"></span>
+                                <span class="gz red" style="flex:25"></span>
+                            </div>
+                            <div class="gauge-marker" style="left:40%">
+                                <span class="pin"></span>
+                                <span class="val">16.1 %</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gauge-axis"><span>0 %</span><span>10 % dipper</span><span>20 %</span><span>40 %</span></div>
+                    <div class="gauge-result">
+                        <span class="status green">Sistólica 11.2 %</span>
+                        <span class="status green">Diastólica 16.1 %</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="muted" style="font-size:12px;margin-top:10px">Aproximación basada en rangos clínicos generales
+                (AAO, EGS, AASM, AHA, literatura sobre presión de perfusión ocular). No reemplaza la lectura del médico
+                tratante, que considera el contexto individual completo.</p>
         </section>
 
         <!-- 3. TIMELINE -->
@@ -1166,25 +1943,49 @@
                     <div class="t">Iridotomía con láser en ambos ojos (para los ángulos estrechos).</div>
                 </div>
                 <div class="ev">
+                    <div class="d">Abr 2023</div>
+                    <div class="t">Angiotomografía carotídea y vertebral (cefalea + amaurosis OD): carótidas normales;
+                        hallazgo de <b>arteria vertebral derecha hipoplásica</b> (variante congénita).</div>
+                </div>
+                <div class="ev">
                     <div class="d">Nov–Dic 2024</div>
                     <div class="t">Trabeculectomía (cirugía de glaucoma) en el ojo derecho — posteriormente fallida.
                     </div>
                 </div>
                 <div class="ev warn">
                     <div class="d">2025</div>
-                    <div class="t">Oclusión de una vena de la retina en el ojo derecho (“infarto ocular”), que
+                    <div class="t">Oclusión de una vena de la retina en el ojo derecho ("infarto ocular"), que
                         dispara el glaucoma neovascular. Tres inyecciones de aflibercept (anti-VEGF) y fotocoagulación.
                     </div>
+                </div>
+                <div class="ev">
+                    <div class="d">Abr 2025</div>
+                    <div class="t"><b>Doppler de cuello: NORMAL</b> (descarta estenosis carotídea).
+                        <b>RM cerebro:</b> microangiopatía crónica leve; menor calibre y mayor señal T2 del nervio óptico
+                        derecho.</div>
                 </div>
                 <div class="ev">
                     <div class="d">Ene 2026</div>
                     <div class="t">Control de neurología: neuropatía óptica isquémica, microangiopatía; se piden más
                         estudios (RM de órbitas, AQP4).</div>
                 </div>
+                <div class="ev">
+                    <div class="d">Abr 2026</div>
+                    <div class="t"><b>OCT Zeiss Cirrus + angiografía con fluoresceína:</b> RNFL OD 68 µm, OI 61 µm;
+                        adelgazamiento documentado de la capa de células ganglionares en el OI. Difícil toma en OD por
+                        opacidad de medios.</div>
+                </div>
                 <div class="ev warn">
                     <div class="d">May 2026</div>
                     <div class="t">Valoración por especialista en glaucoma: plan de láser SLT prioritario en ojo
-                        izquierdo y propuesta de válvula en el derecho (declinada por la familia).</div>
+                        izquierdo y propuesta de válvula en el derecho (declinada por la familia). <b>Remisión urgente a
+                        Medicina Interna</b> para estabilizar la presión arterial.</div>
+                </div>
+                <div class="ev warn">
+                    <div class="d">21–22 May 2026</div>
+                    <div class="t"><b>MAPA 24 h (Cardioib SAS):</b> promedio 105/55 informado como "normal", pero con
+                        mínimo nocturno 66/35 a las 02:31 y pico diurno 171/147 a las 10:36. Patrón dipper normal en
+                        porcentaje.</div>
                 </div>
             </div>
         </section>
@@ -1218,6 +2019,13 @@
                     <h3>Estudios y controles</h3>
                     <p>Exámenes prequirúrgicos, y por neurología, resonancia de órbitas con contraste y anticuerpo AQP4
                         para descartar otras causas del daño del nervio.</p>
+                </div>
+                <div class="card tint">
+                    <span class="tag sand">Remisión urgente</span>
+                    <h3>Medicina Interna</h3>
+                    <p>Oftalmología remitió de manera urgente a Medicina Interna para lograr un control más estable de
+                        la presión arterial, con el objetivo de disminuir el daño vascular ocular y proteger el ojo
+                        izquierdo. El MAPA fue el primer estudio resultante.</p>
                 </div>
             </div>
         </section>
@@ -1302,38 +2110,154 @@
 
             <details class="acc" open>
                 <summary>Ojo izquierdo: el láser SLT ya ES la opción menos invasiva <span class="pl">+</span></summary>
-                <div class="body">Aunque se describió como “más complejo que la iridotomía”, la SLT es uno de
-                    los procedimientos menos invasivos que existen: ambulatorio, sin incisiones y repetible. En el
-                    ensayo <b>LiGHT</b> (6 años), logró control de presión sin gotas en cerca del 70% de ojos de ángulo
-                    abierto, sin complicaciones que amenazaran la visión. Una revisión de ~8.900 ojos confirma su
-                    eficacia a largo plazo. Aplica justo a su caso porque el ojo izquierdo es de <b>ángulo abierto</b>.
+                <div class="body">Aunque se describió como "más complejo que la iridotomía", la SLT es uno de los
+                    procedimientos menos invasivos que existen: ambulatorio, sin incisiones y repetible. En el ensayo
+                    <b>LiGHT</b> (6 años), logró control de presión sin gotas en cerca del 70% de ojos de ángulo abierto,
+                    sin complicaciones que amenazaran la visión. Una revisión de ~8.900 ojos confirma su eficacia a
+                    largo plazo. Aplica justo a su caso porque el ojo izquierdo es de <b>ángulo abierto</b>.
+                    <p style="margin-top:10px"><b>Matiz importante — etiología "mixta" o postraumática:</b> la evidencia
+                        del LiGHT corresponde a glaucoma primario de ángulo abierto. En glaucoma postraumático con
+                        recesión angular (sospechado en su caso), pequeñas series muestran éxito en torno al <b>55%</b>
+                        de los ojos, mejor cuando la presión basal es alta. Sigue siendo opción razonable y repetible,
+                        pero ayuda a calibrar expectativas con el oftalmólogo. Por tratarse de <b>ojo único</b>,
+                        vigilancia reforzada del pico de presión en las primeras 24 h post-procedimiento.</p>
                 </div>
             </details>
 
             <details class="acc">
-                <summary>Factores generales no invasivos: presión arterial y sueño <span class="pl">+</span></summary>
-                <div class="body">La presión arterial que “sube y baja como yoyo” se asocia con progresión del
-                    daño del nervio, sobre todo por las <b>caídas nocturnas</b> que reducen la sangre al nervio óptico.
-                    Se puede plantear al médico: un <b>MAPA de 24 horas</b>, revisar el horario de los antihipertensivos
-                    para no bajar demasiado la presión de noche, y tratar la <b>apnea del sueño</b>. Son medidas sin
-                    cirugía.</div>
+                <summary>Otras cirugías mínimamente invasivas (MIGS) — qué preguntar <span class="pl">+</span></summary>
+                <div class="body">Si la SLT no es suficiente, antes de plantear una cirugía clásica
+                    (trabeculectomía o válvula) en el OI, conviene preguntar por las <b>MIGS</b>. Son intervenciones
+                    intermedias, más seguras que las clásicas pero también menos potentes:
+                    <div class="eyes" style="grid-template-columns: 1.4fr 0.8fr 1.4fr;margin-top:12px">
+                        <div class="hd">Dispositivo</div>
+                        <div class="hd">Reducción PIO</div>
+                        <div class="hd">Perfil</div>
+                        <div class="rh">iStent / iStent inject</div>
+                        <div>~15%</div>
+                        <div>Muy seguro, baja potencia</div>
+                        <div class="rh">Hydrus</div>
+                        <div>~34%</div>
+                        <div>Buen balance seguridad/eficacia</div>
+                        <div class="rh">XEN</div>
+                        <div>~39%</div>
+                        <div>Más potente, riesgo hipotonía</div>
+                        <div class="rh">PreserFlo MicroShunt</div>
+                        <div>~50%</div>
+                        <div>Potente, riesgo hipotonía</div>
+                    </div>
+                    <p style="margin-top:10px">En <b>ojo único con CUP avanzado</b>, la seguridad pesa más que la
+                        potencia: los MIGS trabeculares (iStent, Hydrus) son los más seguros pero pueden no alcanzar el
+                        objetivo de PIO. Los subconjuntivales (XEN, PreserFlo) son más potentes pero conllevan riesgo de
+                        hipotonía, algo delicado en ojo único. La decisión depende de la experiencia del cirujano.</p>
+                </div>
+            </details>
+
+            <details class="acc">
+                <summary>Factores generales: perfusión ocular y cronoterapia <span class="pl">+</span></summary>
+                <div class="body">La presión arterial que "sube y baja como yoyo" se asocia con progresión del daño del
+                    nervio. El concepto clave es la <b>presión de perfusión ocular (OPP)</b>: la diferencia entre la
+                    presión arterial sistémica y la PIO. Cuando la PA cae mucho o la PIO sube, el nervio óptico recibe
+                    poco flujo.
+                    <p style="margin-top:10px"><b>Lectura del MAPA:</b> con el mínimo de 66/35 mmHg y PIO OI 23, la
+                        <b>presión diastólica de perfusión ocular nocturna cae a ~12 mmHg</b>, muy por debajo del umbral
+                        de riesgo (&lt;50 mmHg). La <b>presión basal baja sostenida</b> (80% del tiempo con diastólica
+                        &lt;60) ya es un factor de riesgo, no solo los picos.</p>
+                    <p style="margin-top:10px"><b>Qué plantear con cardiología:</b></p>
+                    <ul style="margin:6px 0 0 18px">
+                        <li><b>Replantear horario del losartán.</b> Con hipotensión nocturna ya documentada, tomarlo al
+                            acostarse probablemente perjudica. Estudios poblacionales (TIME 2022, BedMed 2024) muestran
+                            que en general no importa la hora; <b>en su caso particular, mañana puede ser más seguro</b>.
+                            Los antiguos estudios MAPEC e Hygia (a favor de la noche) están cuestionados.</li>
+                        <li><b>Revisar la dosis.</b> Con promedio 105/55, podría discutirse si la dosis es excesiva.</li>
+                        <li><b>Horario de aspirina y atorvastatina</b> (actualmente a las 17:00): valorar si conviene
+                            mover, ya que contribuyen al perfil hipotensor vespertino-nocturno.</li>
+                    </ul>
+                    <p style="margin-top:10px"><b>Importante:</b> cualquier cambio de horario o dosis debe hacerse
+                        <b>con cardiología</b>. Con antecedente de AIT en 2022, el equilibrio entre "no bajar mucho de
+                        noche" y "no subir de día" lo decide el médico con el MAPA en mano.</p>
+                </div>
+            </details>
+
+            <details class="acc">
+                <summary>Evaluación de componente autonómico (disautonomía) <span class="pl">+</span></summary>
+                <div class="body">Punto <b>nuevo</b> que surge de la historia familiar y del MAPA:
+                    <ul style="margin:6px 0 0 18px">
+                        <li>La hija tiene <b>síndrome vasovagal neurocardiogénico mixto tipo 1</b>, confirmado por mesa
+                            basculante.</li>
+                        <li>La paciente refiere mareos, vértigo e inestabilidad, además de la labilidad tensional.</li>
+                        <li>La literatura asocia disfunción autonómica con glaucoma normotensional y con reducción del
+                            flujo coroideo (OCT-Angiografía).</li>
+                    </ul>
+                    <p style="margin-top:10px"><b>Qué plantear con cardiología:</b> valorar una <b>mesa basculante</b>
+                        (head-up tilt test) en la madre — examen ambulatorio, seguro, sin radiación. Si se confirma
+                        disautonomía, hay medidas conservadoras (hidratación, sal, medias compresivas, maniobras
+                        isométricas) y, eventualmente, farmacológicas (midodrina, fludrocortisona) que deben
+                        individualizarse porque conviven con HTA.</p>
+                </div>
+            </details>
+
+            <details class="acc">
+                <summary>Apnea del sueño: reconsiderar el CPAP <span class="pl">+</span></summary>
+                <div class="body">El informe inicial habla de SAHOS "leve", pero <b>con IAH 18 entra técnicamente en
+                    rango moderado</b> según la clasificación AASM (leve 5–14.9; moderado 15–29.9; severo ≥30). En
+                    SAHOS moderado el beneficio del CPAP es más claro.
+                    <ul style="margin:6px 0 0 18px">
+                        <li>Estudios 2024–2025 muestran mejoría del grosor del anillo neurorretiniano y de la capa de
+                            fibras nerviosas tras 12 meses de CPAP en SAHOS.</li>
+                        <li>En su perfil (SAHOS moderado + glaucoma avanzado + microangiopatía + vertebral hipoplásica +
+                            hipotensión nocturna), el CPAP puede aportar beneficio en perfusión cerebral y ocular.</li>
+                        <li>Conviene valorar formalmente CPAP con neumología; la adherencia (≥4 h/noche) es lo que
+                            sostiene el beneficio cardiovascular.</li>
+                    </ul>
+                </div>
             </details>
 
             <details class="acc">
                 <summary>Neuroprotección: nicotinamida (vitamina B3) <span class="pl">+</span></summary>
-                <div class="body">Complemento de bajo riesgo y evidencia emergente — <b>nunca</b> en reemplazo del
-                    control de la presión. Un ensayo aleatorizado mostró mejoría de la función de la retina al añadir
-                    nicotinamida al tratamiento habitual, en dosis altas (1,5–3 g/día en estudios). Debe consultarse con
-                    el médico antes de iniciarla.</div>
+                <div class="body">Complemento de evidencia <b>emergente, no estándar</b>. Un ensayo aleatorizado fase 2
+                    mostró mejoría de la función de las células ganglionares al añadirla al tratamiento habitual, con
+                    dosis altas (1,5–3 g/día). El ensayo fase 3 <b>NAMinG</b> está en curso.
+                    <p style="margin-top:10px"><b>Postura conjunta AGS / Academia Americana de Oftalmología (enero
+                        2025):</b> <b>no recomiendan uso rutinario todavía</b> — la dosis necesaria (3 g/día) está muy
+                        por encima de las dosis nutricionales habituales y hay <b>riesgo de hepatotoxicidad</b>. Si se
+                        considera, debe ser bajo supervisión médica con <b>monitorización de pruebas hepáticas</b>.</p>
+                    <ul style="margin:6px 0 0 18px">
+                        <li><b>No confundir con niacina común</b> (ácido nicotínico): la nicotinamida no causa "flush" y
+                            tiene perfil distinto, pero a dosis altas también puede ser hepatotóxica.</li>
+                        <li>En esta paciente (atorvastatina + aspirina + losartán): no hay interacciones mayores
+                            conocidas, pero la combinación con estatinas aconseja vigilar transaminasas y CK.</li>
+                        <li>Iniciarla siempre con el oftalmólogo y avisar al resto del equipo. <b>Nunca por cuenta
+                            propia.</b></li>
+                    </ul>
+                </div>
             </details>
 
             <details class="acc">
                 <summary>Ojo derecho: ruta menos invasiva si se evita la válvula <span class="pl">+</span></summary>
-                <div class="body">Como el objetivo es mantener el ojo cómodo: continuar anti-VEGF (ya recibió
-                    aflibercept) y la fotocoagulación realizada, que reducen los neovasos y ayudan con la presión y el
-                    dolor. Si más adelante hay dolor o presión muy alta, la <b>ciclofotocoagulación micropulso</b> es
-                    una opción láser menos destructiva que las técnicas tradicionales y menos invasiva que la válvula,
-                    pensada para ojos con poco potencial visual.</div>
+                <div class="body">Como el objetivo es mantener el ojo cómodo (no recuperar visión):
+                    <p style="margin-top:10px"><b>Tratamiento etiológico (la causa):</b></p>
+                    <ul style="margin:6px 0 0 18px">
+                        <li>Continuar <b>anti-VEGF</b> (ya recibió aflibercept; alternativas: bevacizumab, ranibizumab).
+                            Cochrane y meta-análisis 2024 respaldan su uso en glaucoma neovascular: regresan los neovasos
+                            del iris en ~90% a las 4 semanas. Suelen necesitar repetirse cada 4–8 semanas.</li>
+                        <li><b>Fotocoagulación panretiniana (PRP) completa</b> si quedan zonas por tratar: es el
+                            tratamiento etiológico al eliminar el estímulo isquémico.</li>
+                    </ul>
+                    <p style="margin-top:10px"><b>Tratamiento sintomático (presión y dolor):</b></p>
+                    <ul style="margin:6px 0 0 18px">
+                        <li>Mantener las gotas mientras sean tolerables.</li>
+                        <li>Si aparece dolor o presión muy alta, la <b>ciclofotocoagulación micropulso transescleral
+                            (MP-TSCPC)</b> es opción razonable: éxito ~33% a 12 meses en glaucoma neovascular con mejor
+                            perfil de seguridad que la versión continua (54% pero más complicaciones); ~77% a 24 meses
+                            en glaucoma refractario general. Es repetible y preserva la opción de cirugía futura.</li>
+                    </ul>
+                    <p style="margin-top:10px"><b>Sobre aspirina y neovasos:</b> un estudio reciente (2025) sugirió que
+                        la aspirina prolongada podría favorecer la neovascularización coroidea vía TSP-1. Es un dato
+                        emergente, no concluyente. Si la aspirina está indicada por prevención secundaria (ictus, IAM
+                        previos), no se suspende por este hallazgo — pero conviene plantearlo al cardiólogo y al
+                        retinólogo.</p>
+                </div>
             </details>
         </section>
 
@@ -1355,9 +2279,11 @@
                 <div class="card">
                     <h3>Circulación</h3>
                     <ul class="checklist">
-                        <li>Registrar la presión arterial mañana y noche.</li>
+                        <li>Registro PA <b>3 veces al día</b> (mañana, tarde, antes de dormir) con síntomas anotados.</li>
+                        <li><b>Hidratación 1,5–2 L/día</b> salvo restricción médica (clave si hay disautonomía).</li>
                         <li>Caminar 30 min, varias veces por semana, según su capacidad.</li>
                         <li>Dormir con la cabecera elevada 20–30°.</li>
+                        <li><b>Levantarse despacio</b> de cama/silla (prevenir ortostatismo).</li>
                         <li>Verduras de hoja verde; moderar la cafeína.</li>
                     </ul>
                 </div>
@@ -1371,7 +2297,133 @@
                     </ul>
                 </div>
             </div>
-            <div class="alarm" style="margin-top:16px">
+            <h3 style="margin:32px 0 6px;color:var(--sea)">Guía visual de cuidados</h3>
+            <p class="lead" style="margin-top:-2px">Diez recomendaciones prácticas ilustradas. Pasa el cursor o
+                toca cada tarjeta para verla con más detalle.</p>
+
+            <div class="care-gallery">
+                <figure class="care-item">
+                    <img class="care-img" src="images/01-dormir-cabecera-elevada.jpg"
+                        alt="Persona mayor durmiendo con la cabecera elevada entre 20 y 30 grados, lámpara de mesilla y luz nocturna a ras del suelo"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">1</span>
+                        <div class="care-title">Dormir con la cabecera elevada</div>
+                        <div class="care-desc">Eleva la cabecera <b>20–30°</b> (con cuña o dos almohadas). Ayuda a
+                            regular la presión del ojo durante la noche.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/02-aplicar-gotas.jpg"
+                        alt="Manos de una persona mayor inclinando la cabeza hacia atrás y aplicando una gota oftálmica en el párpado inferior"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">2</span>
+                        <div class="care-title">Aplicar las gotas correctamente</div>
+                        <div class="care-desc">Cabeza atrás, párpado inferior abajo formando bolsillo, una sola gota
+                            sin tocar el ojo. <b>5 minutos</b> entre gotas distintas.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/03-levantarse-despacio.jpg"
+                        alt="Tres viñetas mostrando a una persona mayor levantándose de la cama por pasos: sentarse, pausar con los pies en el suelo, y ponerse de pie con apoyo"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">3</span>
+                        <div class="care-title">Levantarse despacio</div>
+                        <div class="care-desc">En tres pasos: sentarse, pausar con los pies en el suelo, y ponerse de
+                            pie con apoyo. Previene mareos y caídas por bajada brusca de presión.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/04-medir-presion.jpg"
+                        alt="Persona mayor sentada a la mesa midiéndose la presión arterial con un tensiómetro digital, brazo apoyado a la altura del corazón"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">4</span>
+                        <div class="care-title">Medir la presión en casa</div>
+                        <div class="care-desc">Sentada, espalda apoyada, pies en el suelo, brazo a la <b>altura del
+                            corazón</b>. Tres tomas al día y anotarlas con la hora.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/05-bano-seguro.jpg"
+                        alt="Ducha accesible con asiento abatible, dos barras de agarre, alfombra antideslizante en azul y alfombra absorbente fuera de la ducha"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">5</span>
+                        <div class="care-title">Baño seguro</div>
+                        <div class="care-desc">Barras de agarre, asiento de ducha plegable, alfombra antideslizante
+                            dentro y absorbente fuera. Reduce drásticamente el riesgo de caídas.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/06-quitar-obstaculos.jpg"
+                        alt="Comparación antes y después de un pasillo: a la izquierda alfombras sueltas, cables y zapatos dispersos; a la derecha cables canalizados, zapatero ordenado"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">6</span>
+                        <div class="care-title">Quitar obstáculos del paso</div>
+                        <div class="care-desc">Cables canalizados, alfombras fijas o retiradas, zapatos guardados. El
+                            pasillo libre evita tropiezos al ojo útil.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/07-iluminacion-nocturna.jpg"
+                        alt="Dormitorio de noche con luz nocturna a ras del suelo cerca de la puerta y lámpara de mesilla encendida con luz cálida"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">7</span>
+                        <div class="care-title">Iluminación nocturna</div>
+                        <div class="care-desc">Luz nocturna a ras del suelo en el trayecto al baño, lámpara al alcance
+                            de la cama. Recorridos siempre iluminados.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/08-escaleras-pasamanos.jpg"
+                        alt="Escaleras de interior con pasamanos de madera a ambos lados y bandas antideslizantes de color ámbar en el borde de cada escalón"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">8</span>
+                        <div class="care-title">Escaleras con pasamanos</div>
+                        <div class="care-desc"><b>Pasamanos a ambos lados</b>, bandas antideslizantes en cada escalón y
+                            luz arriba y abajo. Subir y bajar siempre con una mano en el pasamanos.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/09-evitar-maniobras.jpg"
+                        alt="Dos siluetas con una equis roja: una persona cargando una caja pesada aguantando la respiración y otra en postura invertida con la cabeza abajo"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">9</span>
+                        <div class="care-title">Evitar maniobras que suben la presión del ojo</div>
+                        <div class="care-desc">No cargar pesos aguantando la respiración ni posturas con la cabeza
+                            invertida. Si hay que levantar algo, hacerlo <b>exhalando</b>.</div>
+                    </figcaption>
+                </figure>
+
+                <figure class="care-item">
+                    <img class="care-img" src="images/10-gafas-proteccion.jpg"
+                        alt="Gafas de protección transparentes sobre una mesa de madera junto a un spray de limpieza y guantes verdes"
+                        loading="lazy">
+                    <figcaption class="care-body">
+                        <span class="care-num">10</span>
+                        <div class="care-title">Gafas de protección</div>
+                        <div class="care-desc">Para tareas con riesgo de salpicadura o golpe (limpieza, jardinería,
+                            cocina con aceite caliente). Proteger el <b>ojo útil</b> es prioridad.</div>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="alarm" style="margin-top:24px">
                 <h3>Acudir a urgencias si aparece</h3>
                 <ul>
                     <li>Dolor ocular intenso o el ojo “duro”, con enrojecimiento marcado.</li>
@@ -1387,19 +2439,62 @@
             <div class="sec-head"><span class="sec-num">8</span>
                 <h2>Preguntas para la consulta</h2>
             </div>
+            <h3 style="margin:12px 0 8px;color:var(--sea)">Sobre el ojo izquierdo (el útil)</h3>
             <div class="qlist">
                 <div class="q"><span class="num">1</span><span>¿La SLT del ojo izquierdo es de bajo riesgo en su caso?
                         ¿Cuántas veces se puede repetir?</span></div>
-                <div class="q"><span class="num">2</span><span>¿Vale la pena un MAPA de 24 h y ajustar el horario de los
-                        antihipertensivos para no bajar la presión de noche?</span></div>
-                <div class="q"><span class="num">3</span><span>¿Conviene tratar la apnea del sueño para proteger el
-                        nervio óptico?</span></div>
-                <div class="q"><span class="num">4</span><span>¿Es razonable la nicotinamida como complemento, y a qué
-                        dosis?</span></div>
-                <div class="q"><span class="num">5</span><span>Para el ojo derecho, si hay dolor o presión alta, ¿la
-                        ciclofotocoagulación micropulso sería menos invasiva que la válvula?</span></div>
-                <div class="q"><span class="num">6</span><span>¿Qué señales en casa indican que el ojo izquierdo está
+                <div class="q"><span class="num">2</span><span>Dada la sospecha de etiología <b>mixta o
+                        postraumática</b>, ¿se han considerado los matices de evidencia (éxito ~55% en postraumático vs
+                        ~70% en POAG)?</span></div>
+                <div class="q"><span class="num">3</span><span>¿Se contemplan <b>MIGS</b> (iStent, Hydrus, XEN,
+                        PreserFlo) como alternativa intermedia antes de cirugía clásica? ¿Cuál sería el balance
+                        riesgo/potencia en ojo único?</span></div>
+                <div class="q"><span class="num">4</span><span>¿Qué señales en casa indican que el ojo izquierdo está
                         empeorando?</span></div>
+            </div>
+
+            <h3 style="margin:18px 0 8px;color:var(--sea)">Sobre la presión arterial y la perfusión</h3>
+            <div class="qlist">
+                <div class="q"><span class="num">5</span><span>A la vista del <b>MAPA de mayo 2026</b> (promedio 105/55,
+                        mínimo 66/35 a las 02:31, pico 171/147 a las 10:36), ¿deberíamos <b>cambiar el horario del
+                        losartán a la mañana</b>? ¿Reducir dosis?</span></div>
+                <div class="q"><span class="num">6</span><span>¿Está justificada una <b>mesa basculante</b> dado el
+                        antecedente familiar de síndrome vasovagal en la hija y los síntomas (mareos, vértigo,
+                        inestabilidad)?</span></div>
+                <div class="q"><span class="num">7</span><span>Aspirina y atorvastatina están programados a las 17:00,
+                        ¿hay margen para mover horarios?</span></div>
+            </div>
+
+            <h3 style="margin:18px 0 8px;color:var(--sea)">Sobre la apnea del sueño</h3>
+            <div class="qlist">
+                <div class="q"><span class="num">8</span><span>IAH 18 es <b>moderado</b> según la AASM. ¿Está indicado
+                        <b>CPAP</b> formalmente, considerando glaucoma avanzado + microangiopatía?</span></div>
+            </div>
+
+            <h3 style="margin:18px 0 8px;color:var(--sea)">Sobre el ojo derecho (paliativo)</h3>
+            <div class="qlist">
+                <div class="q"><span class="num">9</span><span>Para el ojo derecho, si hay dolor o presión alta, ¿la
+                        <b>ciclofotocoagulación micropulso (MP-TSCPC)</b> sería menos invasiva que la válvula?</span>
+                </div>
+                <div class="q"><span class="num">10</span><span>¿Cuál es el plan de <b>anti-VEGF</b> y
+                        <b>panfotocoagulación</b> restante para prevenir nuevos episodios neovasculares y dolor?</span>
+                </div>
+                <div class="q"><span class="num">11</span><span>Si aparece dolor persistente o presión muy alta, ¿cuál
+                        es el <b>plan acordado de antemano</b> (micropulso, ciclo, atropina, analgesia) para no
+                        improvisar en urgencias?</span></div>
+            </div>
+
+            <h3 style="margin:18px 0 8px;color:var(--sea)">Neuroprotección y seguimiento</h3>
+            <div class="qlist">
+                <div class="q"><span class="num">12</span><span>¿Es razonable considerar <b>nicotinamida</b> (3 g/día)
+                        como complemento, dada la postura cauta AGS/AAO 2025 y la necesidad de monitorizar
+                        transaminasas?</span></div>
+                <div class="q"><span class="num">13</span><span>¿Conviene repetir <b>RM de órbitas con contraste y
+                        anticuerpo AQP4</b> (pedido por neurología) para descartar causas inflamatorias del nervio
+                        óptico derecho?</span></div>
+                <div class="q"><span class="num">14</span><span>El seguimiento, ¿lo lleva un <b>glaucomatólogo</b>
+                        (subespecialista) o el oftalmólogo general? En caso único funcional con cuadro complejo, la
+                        diferencia importa.</span></div>
             </div>
             <p class="lead" style="margin-top:18px">Por tratarse de un ojo único funcional y un caso complejo, pedir una
                 <b>segunda opinión</b> con un especialista en glaucoma es completamente apropiado.</p>
@@ -1423,9 +2518,20 @@
                 <div class="r">Revisión sistemática de SLT (2025). <a
                         href="https://www.sciencedirect.com/science/article/pii/S1572100025002753" target="_blank"
                         rel="noopener">sciencedirect.com</a></div>
-                <h3>Presión arterial y nervio óptico</h3>
-                <div class="r">Presión arterial y progresión del glaucoma (2024). <a
-                        href="https://academic.oup.com/ajh/article/37/3/179/7444792" target="_blank"
+                <h3>SLT en glaucoma postraumático / mixto y MIGS</h3>
+                <div class="r">SLT en glaucoma por recesión angular postraumática (PMC). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11646445/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">Meta-análisis de repetición de SLT (PMC). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8807942/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">MIGS: revisión exhaustiva (PMC 2025). <a
+                        href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12344473/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+
+                <h3>Presión arterial, perfusión ocular y cronoterapia</h3>
+                <div class="r">Presión arterial y progresión del glaucoma: revisión sistemática (Am J Hypertens 2024).
+                    <a href="https://academic.oup.com/ajh/article/37/3/179/7444792" target="_blank"
                         rel="noopener">academic.oup.com</a></div>
                 <div class="r">Hipotensión nocturna y daño del campo visual. <a
                         href="https://www.healio.com/news/optometry/20190429/nocturnal-hypotension-associated-with-visual-field-damage-in-normal-tension-glaucoma"
@@ -1433,6 +2539,42 @@
                 <div class="r">Caídas de presión y progresión (PMC). <a
                         href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9705350/" target="_blank"
                         rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">Presión diastólica de perfusión ocular baja y progresión NTG (Eye 2018). <a
+                        href="https://www.nature.com/articles/s41433-018-0057-8" target="_blank"
+                        rel="noopener">nature.com</a></div>
+                <div class="r">Variabilidad de PA y OPP y progresión del campo visual (PubMed 2024). <a
+                        href="https://pubmed.ncbi.nlm.nih.gov/38724962/" target="_blank"
+                        rel="noopener">pubmed.ncbi.nlm.nih.gov</a></div>
+                <div class="r">Meta-análisis OPP y riesgo de glaucoma de ángulo abierto (Sci Rep 2020). <a
+                        href="https://www.nature.com/articles/s41598-020-66914-w" target="_blank"
+                        rel="noopener">nature.com</a></div>
+                <div class="r">Estudio TIME: dosis matutina vs nocturna (Lancet 2022). <a
+                        href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(22)01786-X/fulltext"
+                        target="_blank" rel="noopener">thelancet.com</a></div>
+                <div class="r">Controversias en cronoterapia antihipertensiva (PMC 2024). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12144544/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+
+                <h3>Disautonomía, vertebral hipoplásica y CPAP</h3>
+                <div class="r">Disfunción autonómica y flujo coroideo en NTG (Sci Rep 2022). <a
+                        href="https://www.nature.com/articles/s41598-022-09162-4" target="_blank"
+                        rel="noopener">nature.com</a></div>
+                <div class="r">Mesa basculante: estado del arte (PMC). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1513525/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">Hipoplasia vertebral e ictus de circulación posterior (PMC). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4962415/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">Vértigo y AIT vertebrobasilar (Frontiers 2024). <a
+                        href="https://www.frontiersin.org/journals/stroke/articles/10.3389/fstro.2024.1429068/full"
+                        target="_blank" rel="noopener">frontiersin.org</a></div>
+                <div class="r">CPAP y daño del nervio óptico en SAHOS (Springer 2025). <a
+                        href="https://link.springer.com/article/10.1007/s11325-025-03336-w" target="_blank"
+                        rel="noopener">link.springer.com</a></div>
+                <div class="r">Efecto del CPAP sobre RNFL y sensibilidad visual (ScienceDirect). <a
+                        href="https://www.sciencedirect.com/science/article/abs/pii/S1389945718302570" target="_blank"
+                        rel="noopener">sciencedirect.com</a></div>
+
                 <h3>Neuroprotección</h3>
                 <div class="r">Ensayo de nicotinamida (medRxiv). <a
                         href="https://www.medrxiv.org/content/10.1101/2020.01.28.20019075v2" target="_blank"
@@ -1440,19 +2582,39 @@
                 <div class="r">Nicotinamida y piruvato (JAMA Ophthalmol). <a
                         href="https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2786482" target="_blank"
                         rel="noopener">jamanetwork.com</a></div>
-                <h3>Ojo derecho</h3>
+                <div class="r">Postura conjunta AGS/AAO sobre nicotinamida (2025). <a
+                        href="https://www.aao.org/education/clinical-statement/american-glaucoma-society-american-academy-of-opht"
+                        target="_blank" rel="noopener">aao.org</a></div>
+                <div class="r">Update on Nicotinamide and Glaucoma Management (MDPI 2025). <a
+                        href="https://www.mdpi.com/1422-0067/26/21/10789" target="_blank" rel="noopener">mdpi.com</a>
+                </div>
+
+                <h3>Ojo derecho · glaucoma neovascular, anti-VEGF y MP-TSCPC</h3>
                 <div class="r">Manejo del glaucoma neovascular (AAO). <a
                         href="https://www.aao.org/eyenet/article/diagnosis-and-management-of-neovascular-glaucoma"
                         target="_blank" rel="noopener">aao.org</a></div>
-                <div class="r">Actualización en glaucoma neovascular (PMC). <a
+                <div class="r">Actualización en glaucoma neovascular (PMC 2024). <a
                         href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12507170/" target="_blank"
                         rel="noopener">ncbi.nlm.nih.gov</a></div>
                 <div class="r">Anti-VEGF en glaucoma neovascular (BMC). <a
-                        href="https://bmcophthalmol.biomedcentral.com/articles/10.1186/s12886-016-0327-9"
-                        target="_blank" rel="noopener">biomedcentral.com</a></div>
+                        href="https://bmcophthalmol.biomedcentral.com/articles/10.1186/s12886-016-0327-9" target="_blank"
+                        rel="noopener">biomedcentral.com</a></div>
+                <div class="r">Anti-VEGF en glaucoma neovascular (Revisión Cochrane). <a
+                        href="https://www.cochrane.org/CD007920/EYES_anti-vascular-endothelial-growth-factor-neovascular-glaucoma"
+                        target="_blank" rel="noopener">cochrane.org</a></div>
                 <div class="r">Oclusión venosa de la retina (Cleveland Clinic). <a
                         href="https://my.clevelandclinic.org/health/diseases/14206-retinal-vein-occlusion-rvo"
                         target="_blank" rel="noopener">clevelandclinic.org</a></div>
+                <div class="r">MP-TSCPC en glaucoma refractario, 24 meses (PubMed). <a
+                        href="https://pubmed.ncbi.nlm.nih.gov/35187401/" target="_blank"
+                        rel="noopener">pubmed.ncbi.nlm.nih.gov</a></div>
+                <div class="r">Micropulso vs onda continua TSCPC en glaucoma neovascular (PMC). <a
+                        href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8908348/" target="_blank"
+                        rel="noopener">ncbi.nlm.nih.gov</a></div>
+                <div class="r">Aspirina prolongada y neovascularización coroidea — TSP-1 (Frontiers 2025). <a
+                        href="https://www.frontiersin.org/journals/cellular-neuroscience/articles/10.3389/fncel.2025.1716229/full"
+                        target="_blank" rel="noopener">frontiersin.org</a></div>
+
                 <h3>Estilo de vida</h3>
                 <div class="r">Estilo de vida en glaucoma (Glaucoma Research Foundation). <a
                         href="https://glaucoma.org/articles/exercise-diet-and-other-lifestyle-changes-for-people-living-with-glaucoma"
@@ -1519,6 +2681,100 @@
                 }
             }
         });
+
+        /* ============ MAPA 24h CHART ============ */
+        // Datos reales del MAPA del 21–22/05/2026 (Cardioib SAS).
+        // labels = hora; sys = sistólica; dia = diastólica.
+        const mapaSys = [
+            { t: '13:50', sys: 141, dia: 74 }, { t: '14:00', sys: 124, dia: 66 }, { t: '14:15', sys: 110, dia: 56 },
+            { t: '14:33', sys: 84, dia: 45 }, { t: '14:45', sys: 93, dia: 54 }, { t: '15:00', sys: 94, dia: 58 },
+            { t: '15:15', sys: 103, dia: 56 }, { t: '15:31', sys: 93, dia: 67 }, { t: '15:45', sys: 103, dia: 61 },
+            { t: '16:01', sys: 119, dia: 47 }, { t: '16:15', sys: 107, dia: 55 }, { t: '16:30', sys: 112, dia: 56 },
+            { t: '16:45', sys: 110, dia: 54 }, { t: '17:03', sys: 99, dia: 44 }, { t: '17:15', sys: 108, dia: 45 },
+            { t: '17:30', sys: 108, dia: 55 }, { t: '17:45', sys: 118, dia: 55 }, { t: '18:01', sys: 125, dia: 52 },
+            { t: '18:15', sys: 111, dia: 58 }, { t: '18:30', sys: 111, dia: 46 }, { t: '18:45', sys: 103, dia: 59 },
+            { t: '19:00', sys: 100, dia: 51 }, { t: '19:15', sys: 107, dia: 46 }, { t: '19:30', sys: 106, dia: 53 },
+            { t: '19:45', sys: 108, dia: 54 }, { t: '20:00', sys: 89, dia: 49 }, { t: '20:15', sys: 95, dia: 45 },
+            { t: '20:30', sys: 106, dia: 57 }, { t: '20:45', sys: 100, dia: 44 }, { t: '21:00', sys: 109, dia: 65 },
+            { t: '21:15', sys: 114, dia: 60 }, { t: '21:30', sys: 109, dia: 62 }, { t: '21:45', sys: 113, dia: 62 },
+            { t: '22:00', sys: 113, dia: 58 }, { t: '22:30', sys: 91, dia: 48 }, { t: '23:01', sys: 90, dia: 41 },
+            { t: '23:31', sys: 82, dia: 39 }, { t: '00:01', sys: 90, dia: 46 }, { t: '00:31', sys: 94, dia: 51 },
+            { t: '01:01', sys: 87, dia: 50 }, { t: '01:31', sys: 104, dia: 52 }, { t: '02:01', sys: 106, dia: 50 },
+            { t: '02:31', sys: 66, dia: 35 }, { t: '03:01', sys: 96, dia: 46 }, { t: '03:31', sys: 87, dia: 44 },
+            { t: '04:01', sys: 88, dia: 42 }, { t: '04:31', sys: 115, dia: 57 }, { t: '05:01', sys: 108, dia: 53 },
+            { t: '05:32', sys: 109, dia: 57 }, { t: '06:01', sys: 122, dia: 56 }, { t: '06:31', sys: 90, dia: 44 },
+            { t: '07:02', sys: 90, dia: 39 }, { t: '07:17', sys: 97, dia: 49 }, { t: '07:32', sys: 104, dia: 50 },
+            { t: '07:46', sys: 104, dia: 51 }, { t: '08:01', sys: 84, dia: 42 }, { t: '08:16', sys: 90, dia: 43 },
+            { t: '08:31', sys: 104, dia: 45 }, { t: '08:45', sys: 105, dia: 50 }, { t: '09:00', sys: 113, dia: 47 },
+            { t: '09:15', sys: 109, dia: 53 }, { t: '09:30', sys: 100, dia: 69 }, { t: '09:45', sys: 120, dia: 56 },
+            { t: '10:00', sys: 125, dia: 45 }, { t: '10:15', sys: 106, dia: 62 }, { t: '10:36', sys: 171, dia: 147 },
+            { t: '10:46', sys: 117, dia: 64 }, { t: '11:00', sys: 103, dia: 57 }, { t: '11:15', sys: 118, dia: 94 },
+            { t: '11:30', sys: 109, dia: 41 }, { t: '11:48', sys: 130, dia: 110 }, { t: '12:03', sys: 94, dia: 55 },
+            { t: '12:36', sys: 90, dia: 50 }, { t: '12:46', sys: 113, dia: 62 }, { t: '13:00', sys: 104, dia: 55 },
+            { t: '13:15', sys: 107, dia: 51 }
+        ];
+
+        const mapaEl = document.getElementById('mapaChart');
+        if (mapaEl) {
+            new Chart(mapaEl, {
+                type: 'line',
+                data: {
+                    labels: mapaSys.map(d => d.t),
+                    datasets: [
+                        {
+                            label: 'Sistólica', data: mapaSys.map(d => d.sys),
+                            borderColor: danger, backgroundColor: 'rgba(176,65,62,.08)',
+                            tension: .25, pointRadius: 1.5, borderWidth: 2, fill: false
+                        },
+                        {
+                            label: 'Diastólica', data: mapaSys.map(d => d.dia),
+                            borderColor: teal, backgroundColor: 'rgba(31,78,95,.08)',
+                            tension: .25, pointRadius: 1.5, borderWidth: 2, fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y + ' mmHg' } }
+                    },
+                    scales: {
+                        y: { beginAtZero: false, suggestedMin: 30, suggestedMax: 180, title: { display: true, text: 'mmHg' }, grid: { color: '#eee2cf' } },
+                        x: { ticks: { maxTicksLimit: 12, autoSkip: true }, grid: { display: false }, title: { display: true, text: 'Hora (21–22 mayo 2026)' } }
+                    }
+                }
+            });
+        }
+
+        const diasEl = document.getElementById('diasHistChart');
+        if (diasEl) {
+            // Distribución de diastólica del MAPA (histograma del informe oficial)
+            new Chart(diasEl, {
+                type: 'bar',
+                data: {
+                    labels: ['40–50', '50–60', '60–70', '70–80', '80–90', '90–100', '140–150'],
+                    datasets: [{
+                        label: '% del tiempo',
+                        data: [40.79, 40.79, 13.16, 1.32, 1.32, 1.32, 1.32],
+                        backgroundColor: ['#b0413e', '#b0413e', '#d29a4e', '#3f7d5c', '#3f7d5c', '#3f7d5c', '#b0413e'],
+                        borderRadius: 6, barThickness: 36
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: c => c.parsed.y.toFixed(1) + ' % del tiempo' } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, suggestedMax: 50, title: { display: true, text: '% del tiempo' }, grid: { color: '#eee2cf' } },
+                        x: { grid: { display: false }, title: { display: true, text: 'Diastólica (mmHg)' } }
+                    }
+                }
+            });
+        }
 
         /* ============ 3D EYE (Three.js) ============ */
         (function () {
